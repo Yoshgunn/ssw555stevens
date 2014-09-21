@@ -1,38 +1,68 @@
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <string>
-#include <vector>
+#include <map>
+#include <utility>
 
 using namespace std;
 
-const vector<string> tags { "INDI", "NAME", "SEX", "BIRT", "DEAT",
-                            "FAMC", "FAMS", "FAM", "MARR", "HUSB",
-                            "WIFE", "CHIL", "DIV", "DATE", "TRLR", "NOTE" };
-
-void FindTag(string s)
-{
-    for (auto t:tags)
-    {
-        if (s.find(t)!=string::npos)
-        {
-            cout<<t<<endl;
-            return;
-        }
-    }
-    cout << "Invalid tag" << endl;
-}
 
 int main()
 {
+    map<string, string> individual;
+    map<string, pair<string, string> > family;
     ifstream f("GedcomFile.ged");
-    string line;
+    string line, id;
     while (getline(f, line))
     {
-        cout << line << endl;
-        cout << "Level is: " << line[0] << endl;
-        FindTag(line);
-        cout << endl;
+        istringstream iss(line);
+        int level;
+        string token;
+        iss >> level;
+        iss >> token;
+        if (level == 0)
+        {
+            if (token[0] == '@')
+            {
+                id = token;
+            }
+        }
+        else
+        {
+            string s, t;
+            iss >> s;
+
+            if (token == "NAME")
+            {
+                iss >> t;
+                individual[id] = s + " " + t.substr(1, t.size() - 2);
+            }
+            else if (token == "HUSB")
+            {
+                family[id].first = s;
+            }
+            else if (token == "WIFE")
+            {
+                family[id].second = s;
+            }
+        }
+
+
     }
+
+    for (auto &s : individual)
+    {
+        cout << s.second << endl;
+    }
+
+    for (auto &s : family)
+    {
+        cout << "Husband: " << individual[s.second.first] << endl;
+        cout << "Wife: " << individual[s.second.second] << endl;
+    }
+
     f.close();
+
     return 0;
 }
