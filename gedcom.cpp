@@ -25,6 +25,8 @@ int main()
         cout<<"system only accept *.ged file."<<endl;
         return 1;
     }
+    cout<<"This is a *.ged file."<<endl;
+    /*
     map<string, string> individual;
     map<string, pair<string, string> > family;
     ifstream f(filename);
@@ -62,10 +64,7 @@ int main()
                 family[id].second = s;
             }
         }
-        
-        
     }
-    
     for (auto &s : individual)
     {
         cout << s.second << endl;
@@ -76,8 +75,7 @@ int main()
         cout << "Husband: " << individual[s.second.first] << endl;
         cout << "Wife: " << individual[s.second.second] << endl;
     }
-    
     f.close();
-    
+    */
     return 0;
 }
