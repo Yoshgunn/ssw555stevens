@@ -18,11 +18,11 @@ using namespace std;
 int main()
 {
     string filename;
-    cout<<"Please enter the file name."<<endl;
+    cout<<"Please enter the file name.(Including suffix name)"<<endl;
     cin>>filename;
-    if (filename.substr(max(0, (int)(filename.size()-4))) != string(".ged"))
+    if (filename.size()<5||filename.substr(filename.size()-4,4) != string(".ged"))
     {
-        cout<<"system only accept .ged file."<<endl;
+        cout<<"system only accept *.ged file."<<endl;
         return 1;
     }
     map<string, string> individual;
