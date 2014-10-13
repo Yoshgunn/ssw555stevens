@@ -110,7 +110,9 @@ std::vector<Family> GetFamilies(std::vector<Person> people)
 			if(line.substr(0,4) == "0 @F")
 			{
 				if(totalPep >0)
-				familyColl.push_back(f);
+				{
+					familyColl.push_back(f);
+				}
 				Family f;
 				totalPep++;
 			}
@@ -127,6 +129,7 @@ std::vector<Family> GetFamilies(std::vector<Person> people)
 					if( buf.substr(0,2) =="@F")
 					{
 						f.Id = buf;
+						f.Children.clear();
 					}
 					else if(buf =="HUSB")
 					{
@@ -145,7 +148,7 @@ std::vector<Family> GetFamilies(std::vector<Person> people)
 					{
 						string id;
 						ss >> id;
-						f.Children.push_back(FindPerson(id,people));
+						f.AddChild(FindPerson(id,people));
 					}
 				}
 				index++;
