@@ -16,7 +16,7 @@
 using namespace std;
 
 
-int main()
+int main1()
 {
 	// Users must enter the name of the file manually.
     string filename;
