@@ -15,8 +15,9 @@ string replace(string line,string text, int length)
 std::vector<Person> GetPeople()
 {
 	string line;
-	ifstream myfile("C:\\Users\\Dipan\\Documents\\GitHub\\ssw555stevens\\CS_555_Project\\CS_555_Project\\Debug\\My-Family-7-Sep-2014.ged",ios::in);
-	//  ifstream myfile("Test.txt");
+	// ifstream myfile("C:\\Users\\Dipan\\Documents\\GitHub\\ssw555stevens\\CS_555_Project\\CS_555_Project\\Debug\\My-Family-7-Sep-2014.ged",ios::in);
+	ifstream myfile("Debug\\AcceptanceTestFile.ged", ios::in);
+
 	if (myfile.is_open())
 	{
 		Person p;
@@ -86,6 +87,10 @@ std::vector<Person> GetPeople()
 		myfile.close();
 		return people;
 	}
+	else
+	{
+		cout << "Couldn't find the requested file." << endl;
+	}
 }
 Person FindPerson(string id, std::vector<Person> people)
 {
@@ -98,8 +103,9 @@ Person FindPerson(string id, std::vector<Person> people)
 std::vector<Family> GetFamilies(std::vector<Person> people)
 {
 	string line;
-	ifstream myfile("C:\\Users\\Dipan\\Documents\\GitHub\\ssw555stevens\\CS_555_Project\\CS_555_Project\\Debug\\My-Family-7-Sep-2014.ged",ios::in);
-	//  ifstream myfile("Test.txt");
+	// ifstream myfile("C:\\Users\\Dipan\\Documents\\GitHub\\ssw555stevens\\CS_555_Project\\CS_555_Project\\Debug\\My-Family-7-Sep-2014.ged", ios::in);
+	ifstream myfile("Debug\\AcceptanceTestFile.ged", ios::in);
+
 	if (myfile.is_open())
 	{
 		Family f;
@@ -124,12 +130,13 @@ std::vector<Family> GetFamilies(std::vector<Person> people)
 			int index =0;
 			while (ss >> buf && index <2)
 			{
-				if( index ==1)
+				if( index == 1)
 				{
 					if( buf.substr(0,2) =="@F")
 					{
 						f.Id = buf;
 						f.Children.clear();
+						f.Marriage = "Unmarried";
 					}
 					else if(buf =="HUSB")
 					{
@@ -148,7 +155,13 @@ std::vector<Family> GetFamilies(std::vector<Person> people)
 					{
 						string id;
 						ss >> id;
-						f.AddChild(FindPerson(id,people));
+						// f.AddChild(FindPerson(id,people));	This function was not found
+						f.Children.push_back(FindPerson(id,people));
+					}
+					else if( buf =="MARR")
+					{
+						getline(myfile, line);
+						f.Marriage = line.substr(7);
 					}
 				}
 				index++;
@@ -167,11 +180,12 @@ int _tmain(int argc, _TCHAR* argv[])
 	
 	std::vector<Person> people = GetPeople();
 	std::vector<Family> families = GetFamilies(people);
-
+	
 	for (std::vector<Family>::const_iterator it = families.begin(); it!=families.end(); ++it) {
-		cout << "Family Id : " <<(*it).Id << "\n";
-		cout << "\t Husband Name : " <<(*it).Husband.GivenName<< "\n";
-		cout << "\t Wife Name : " <<(*it).Wife.GivenName<< "\n";
+		cout << "Family Id : " << (*it).Id << "\n";
+		cout << "\t Husband Name : " << (*it).Husband.GivenName << "\n";
+		cout << "\t Wife Name : " << (*it).Wife.GivenName << "\n";
+		cout << "\t Date Married : " << (*it).Marriage << "\n";
 		for (std::vector<Person>::const_iterator itp = (*it).Children.begin(); itp!=(*it).Children.end(); ++itp) {
 			cout << "\t\t Children Name : " <<(*itp).GivenName<< "\n";
 		}

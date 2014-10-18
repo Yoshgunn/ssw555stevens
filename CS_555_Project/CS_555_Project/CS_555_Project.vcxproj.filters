@@ -19,6 +19,9 @@
     <None Include="Debug\My-Family-7-Sep-2014.ged">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="..\Debug\AcceptanceTestFile.ged">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
