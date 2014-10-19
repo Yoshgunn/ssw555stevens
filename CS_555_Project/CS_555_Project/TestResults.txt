@@ -1,0 +1,49 @@
+Family Id : @F1@
+	 Husband Name : Earl
+	 Wife Name : Angela
+	 Date Married : 6 AUG 1954
+		 Child Name : Paula
+		 Child Name : Joshua
+Family Id : @F2@
+	 Husband Name : David
+	 Wife Name : Paula
+	 Date Married : 16 JUN 1999
+		 Child Name : Shannon
+Family Id : @F3@
+	 Husband Name : Jerry
+	 Wife Name : Paula
+	 Date Married : 8 DEC 1954
+		 Child Name : Angela
+		 Child Name : Andrew
+Family Id : @F4@
+	 Husband Name : Andrew
+	 Wife Name : Jillian
+Family Id : @F5@
+* *ERROR FOUND: Both spouses are the same gender!* *
+	 Husband Name : Joshua
+	 Wife Name : Alice
+* *ERROR FOUND: Wives must be Female!* *
+	 Date Married : 15 APR 1984
+		 Child Name : Danielle
+Family Id : @F6@
+	 Husband Name : Alice
+	 Wife Name : Scarlet
+	 Date Married : 8 NOV 1985
+		 Child Name : Alex
+		 Child Name : Sabrina
+		 Child Name : Dan
+		 Child Name : Bradley
+		 Child Name : Nicholas
+		 Child Name : Kaley
+		 Child Name : Anita
+		 Child Name : Quinn
+		 Child Name : Eric
+		 Child Name : Andrew
+		 Child Name : Noble
+Family Id : @F7@
+	 Husband Name : Alice
+	 Wife Name : Scarlet
+		 Child Name : Alice
+Family Id : @F8@
+	 Husband Name : Alex
+	 Wife Name : Danielle

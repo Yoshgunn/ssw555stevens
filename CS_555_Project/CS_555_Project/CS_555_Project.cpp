@@ -136,7 +136,7 @@ std::vector<Family> GetFamilies(std::vector<Person> people)
 					{
 						f.Id = buf;
 						f.Children.clear();
-						f.Marriage = "Unmarried";
+						f.Marriage = "";
 					}
 					else if(buf =="HUSB")
 					{
@@ -180,30 +180,48 @@ int _tmain(int argc, _TCHAR* argv[])
 	
 	std::vector<Person> people = GetPeople();
 	std::vector<Family> families = GetFamilies(people);
+
+	ofstream output("TestResults.txt");
 	
-	for (std::vector<Family>::const_iterator it = families.begin(); it!=families.end(); ++it) {
+	for (std::vector<Family>::const_iterator it = families.begin(); it!=families.end(); ++it) 
+	{
 		cout << "Family Id : " << (*it).Id << "\n";
+		output << "Family Id : " << (*it).Id << "\n";
 		if((*it).Husband.Sex==(*it).Wife.Sex)
 		{
-			cout<<"Homosexual marriage"<<endl;
+			cout << "* *ERROR FOUND: Both spouses are the same gender!* *" << endl;
+			output << "* *ERROR FOUND: Both spouses are the same gender!* *" << endl;
 		}
 		cout << "\t Husband Name : " << (*it).Husband.GivenName << "\n";
+		output << "\t Husband Name : " << (*it).Husband.GivenName << "\n";
 		if((*it).Husband.Sex!="M")
 	   	{
-	   		cout<<"must M"<<endl;
+	   		cout << "* *ERROR FOUND: Husbands must be Male!* *" << endl;
+			output << "* *ERROR FOUND: Husbands must be Male!* *" << endl;
 	   	}
 		cout << "\t Wife Name : " << (*it).Wife.GivenName << "\n";
+		output << "\t Wife Name : " << (*it).Wife.GivenName << "\n";
 		if((*it).Wife.Sex!="F")
 		{
-			cout<<"must Female"<<endl;
+			cout << "* *ERROR FOUND: Wives must be Female!* *" << endl;
+			output << "* *ERROR FOUND: Wives must be Female!* *" << endl;
+
 		}
-		cout << "\t Date Married : " << (*it).Marriage << "\n";
-		for (std::vector<Person>::const_iterator itp = (*it).Children.begin(); itp!=(*it).Children.end(); ++itp) {
-			cout << "\t\t Children Name : " <<(*itp).GivenName<< "\n";
+		if ( (*it).Marriage != "" )
+		{
+			cout << "\t Date Married : " << (*it).Marriage << "\n";
+			output << "\t Date Married : " << (*it).Marriage << "\n";
+		}
+		for (std::vector<Person>::const_iterator itp = (*it).Children.begin(); itp!=(*it).Children.end(); ++itp) 
+		{
+			cout << "\t\t Child Name : " << (*itp).GivenName << "\n";
+			output << "\t\t Child Name : " << (*itp).GivenName << "\n";
 		}
 		cout << "\n";
 	}
 	/*else cout << "Unable to open file \n"; */
+
+	output.close();
 
 	cout << "\nType 'C' and press 'ENTER' Key to close the program \n";
 	string p;

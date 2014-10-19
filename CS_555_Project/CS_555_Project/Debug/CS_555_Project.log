@@ -1,23 +1,16 @@
-﻿Build started 10/18/2014 7:18:35 PM.
+﻿Build started 10/19/2014 3:59:27 PM.
      1>Project "C:\Users\Yoshgunn\Documents\MastersDegree\SSW-555-Agile\GroupProject\ssw555stevens\CS_555_Project\CS_555_Project\CS_555_Project.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\CS_555_Project.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
          All outputs are up-to-date.
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W0 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\CS_555_Project.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt CS_555_Project.cpp
-         CS_555_Project.cpp
+         All outputs are up-to-date.
        ManifestResourceCompile:
          All outputs are up-to-date.
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Yoshgunn\Documents\MastersDegree\SSW-555-Agile\GroupProject\ssw555stevens\CS_555_Project\Debug\CS_555_Project.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\CS_555_Project.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Yoshgunn\Documents\MastersDegree\SSW-555-Agile\GroupProject\ssw555stevens\CS_555_Project\Debug\CS_555_Project.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Yoshgunn\Documents\MastersDegree\SSW-555-Agile\GroupProject\ssw555stevens\CS_555_Project\Debug\CS_555_Project.lib" /MACHINE:X86 Debug\CS_555_Project.exe.embed.manifest.res
-         Debug\CS_555_Project.obj
-         Debug\stdafx.obj
+         All outputs are up-to-date.
        Manifest:
-         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\CS_555_Project.exe.embed.manifest" /manifest Debug\CS_555_Project.exe.intermediate.manifest
          All outputs are up-to-date.
-       LinkEmbedManifest:
-         All outputs are up-to-date.
-         CS_555_Project.vcxproj -> C:\Users\Yoshgunn\Documents\MastersDegree\SSW-555-Agile\GroupProject\ssw555stevens\CS_555_Project\Debug\CS_555_Project.exe
        FinalizeBuildStatus:
          Deleting file "Debug\CS_555_Project.unsuccessfulbuild".
          Touching "Debug\CS_555_Project.lastbuildstate".
@@ -25,4 +18,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.69
+Time Elapsed 00:00:00.08
