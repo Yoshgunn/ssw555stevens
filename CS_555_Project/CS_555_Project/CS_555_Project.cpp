@@ -183,8 +183,20 @@ int _tmain(int argc, _TCHAR* argv[])
 	
 	for (std::vector<Family>::const_iterator it = families.begin(); it!=families.end(); ++it) {
 		cout << "Family Id : " << (*it).Id << "\n";
+		if((*it).Husband.Sex==(*it).Wife.Sex)
+		{
+			cout<<"Homosexual marriage"<<endl;
+		}
 		cout << "\t Husband Name : " << (*it).Husband.GivenName << "\n";
+		if((*it).Husband.Sex!="M")
+	   	{
+	   		cout<<"must M"<<endl;
+	   	}
 		cout << "\t Wife Name : " << (*it).Wife.GivenName << "\n";
+		if((*it).Wife.Sex!="F")
+		{
+			cout<<"must Female"<<endl;
+		}
 		cout << "\t Date Married : " << (*it).Marriage << "\n";
 		for (std::vector<Person>::const_iterator itp = (*it).Children.begin(); itp!=(*it).Children.end(); ++itp) {
 			cout << "\t\t Children Name : " <<(*itp).GivenName<< "\n";
