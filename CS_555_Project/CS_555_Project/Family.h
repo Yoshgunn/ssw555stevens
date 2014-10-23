@@ -4,12 +4,24 @@
 
 struct Family
 {
+private:
+	
 public:
+	std::vector<Person> Children;
 	string Id;
-	string Marriage;
+	std::tm Marriage;
 	Person Husband;
 	Person Wife;
-	std::vector<Person> Children;
+	
 
+	Family()
+	{
+	}
+
+	bool AddChild(Person child)
+	{
+		Children.push_back(child);
+		return true;
+	}
 };
 

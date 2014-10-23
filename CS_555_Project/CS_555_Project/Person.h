@@ -11,8 +11,8 @@ public:
 	string GivenName;
 	string Surname;
 	string Sex;
-	string Birth;
-	string Death;
+	std::tm Birth;
+	std::tm Death;
 	string LegalName;
 	Person *Spouse;
 	Person *Mother;

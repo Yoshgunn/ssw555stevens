@@ -4,18 +4,61 @@
 #include "stdafx.h"
 #include "Family.h"
 
-string replace(string line,string text, int length)
+int CompareDates(std::tm first,std::tm second)
 {
-	int pos = line.find( text );
+	if((first.tm_year > second.tm_year || first.tm_year == second.tm_year) &&
+		(first.tm_mon > second.tm_mon || first.tm_mon == second.tm_mon) &&
+		(first.tm_mday > second.tm_mday)) 
+		return 1;
+	else if( first.tm_year == second.tm_year && first.tm_mon == second.tm_mon && first.tm_mday == second.tm_mday)
+		return 0;
+	else
+		return -1;
+}
+string replace(string line,string textToBeReplaced, int length,string newText)
+{
+	int pos = line.find( textToBeReplaced );
 	if ( pos != string::npos ) {
-		return line.replace(0, pos+5, "");   // 5 = length( $name )
+		return line.replace(pos, length, newText);   // 5 = length( $name )
+	}
+	return line;
+}
+string replace(string line,string textToBeReplaced, int length)
+{
+	int pos = line.find( textToBeReplaced );
+	if ( pos != string::npos ) {
+		return line.replace(0, pos+length, "");   // 5 = length( $name )
 	}
 	return "";
+}
+std::tm try_get_date(const std::string& s)
+{
+		string newSt = replace(s,"JAN",3,"Jan");
+		newSt = replace(newSt,"FEB",3,"Feb");
+		newSt = replace(newSt,"MAR",3,"Mar");
+		newSt = replace(newSt,"APR",3,"Apr");
+		newSt = replace(newSt,"MAY",3,"May");
+		newSt = replace(newSt,"JUN",3,"Jun");
+		newSt = replace(newSt,"JUL",3,"Jul");
+		newSt = replace(newSt,"AUG",3,"Aug");
+		newSt = replace(newSt,"SEP",3,"Sep");
+		newSt = replace(newSt,"OCT",3,"Oct");
+		newSt = replace(newSt,"NOV",3,"Nov");
+		newSt = replace(newSt,"DEC",3,"Dec");
+
+
+		std::tm t;
+		std::istringstream ss(newSt);
+		ss.imbue(std::locale(""));
+		//ss >> std::get_time(&t, "%Y-%b-%d %H:%M:%S");
+		ss >> std::get_time(&t, "%d %b %Y");
+		 //std::cout << std::put_time(&t, "%Y %b %d") << '\n';
+		return t;
 }
 std::vector<Person> GetPeople()
 {
 	string line;
-	// ifstream myfile("C:\\Users\\Dipan\\Documents\\GitHub\\ssw555stevens\\CS_555_Project\\CS_555_Project\\Debug\\My-Family-7-Sep-2014.ged",ios::in);
+	// ifstream myfile("C:\\Users\\Dipan\\Documents\\GitHub\\ssw555stevens\\CS_555_Project\\CS_555_Project\\Debug\\AcceptanceTestFile.ged",ios::in);
 	ifstream myfile("Debug\\AcceptanceTestFile.ged", ios::in);
 
 	if (myfile.is_open())
@@ -66,12 +109,17 @@ std::vector<Person> GetPeople()
 					else if( buf =="BIRT")
 					{
 						getline(myfile,line);
-						ss >> p.Birth;
+						//std::tm ds = try_get_date("1 MAR 1985");
+						std::tm ds = try_get_date(replace(line,"DATE",5));
+						p.Birth = ds;
+						//ss >> p.Birth;
 					}
 					else if( buf =="DEAT")
 					{
 						getline(myfile,line);
-						ss >> p.Death;
+						std::tm ds = try_get_date(replace(line,"DATE",5));
+						p.Death = ds;
+						//ss >> p.Death;
 					}
 					else if( buf =="FAMC")
 					{
@@ -103,7 +151,7 @@ Person FindPerson(string id, std::vector<Person> people)
 std::vector<Family> GetFamilies(std::vector<Person> people)
 {
 	string line;
-	// ifstream myfile("C:\\Users\\Dipan\\Documents\\GitHub\\ssw555stevens\\CS_555_Project\\CS_555_Project\\Debug\\My-Family-7-Sep-2014.ged", ios::in);
+	 //ifstream myfile("C:\\Users\\Dipan\\Documents\\GitHub\\ssw555stevens\\CS_555_Project\\CS_555_Project\\Debug\\AcceptanceTestFile.ged", ios::in);
 	ifstream myfile("Debug\\AcceptanceTestFile.ged", ios::in);
 
 	if (myfile.is_open())
@@ -136,7 +184,7 @@ std::vector<Family> GetFamilies(std::vector<Person> people)
 					{
 						f.Id = buf;
 						f.Children.clear();
-						f.Marriage = "";
+						//f.Marriage = "";
 					}
 					else if(buf =="HUSB")
 					{
@@ -155,13 +203,14 @@ std::vector<Family> GetFamilies(std::vector<Person> people)
 					{
 						string id;
 						ss >> id;
-						// f.AddChild(FindPerson(id,people));	This function was not found
-						f.Children.push_back(FindPerson(id,people));
+						f.AddChild(FindPerson(id,people));
 					}
 					else if( buf =="MARR")
 					{
 						getline(myfile, line);
-						f.Marriage = line.substr(7);
+						//f.Marriage = line.substr(7);
+						std::tm ds = try_get_date(line.substr(7));
+						f.Marriage = ds;
 					}
 				}
 				index++;
@@ -177,6 +226,20 @@ int _tmain(int argc, _TCHAR* argv[])
 	std::string str[] = { "INDI","NAME","SEX","BIRT","DEAT","FAMC","FAMS","FAM","MARR","HUSB","WIFE","CHIL","DIV","DATE","TRLR","NOTE"};
 	vector< std::string > validTags( str, str + ( sizeof ( str ) /  sizeof ( std::string ) ) );
 
+	///Test compare date function
+
+	/*switch(CompareDates(try_get_date("1 Jan 2014"),try_get_date("1 Jan 2014")))
+		{case 1:
+			cout << "2 Jan 2014 is greater than 1 Jan 2014";
+			break;
+		case 0:
+			cout << "1 Jan 2014 is equal to 1 Jan 2014";
+			break;
+		case -1:
+			cout << "1 Jan 2014 is less than 2 Jan 2014";
+			break;
+
+	}*/
 	
 	std::vector<Person> people = GetPeople();
 	std::vector<Family> families = GetFamilies(people);
@@ -207,11 +270,13 @@ int _tmain(int argc, _TCHAR* argv[])
 			output << "* *ERROR FOUND: Wives must be Female!* *" << endl;
 
 		}
-		if ( (*it).Marriage != "" )
-		{
-			cout << "\t Date Married : " << (*it).Marriage << "\n";
-			output << "\t Date Married : " << (*it).Marriage << "\n";
-		}
+		/*if ( (*it).Marriage != "")
+		{*/
+			std::tm marr = (*it).Marriage;
+			//cout << "\t\t| Birth Date :" << put_time(&marr, "%d %b %Y") << "\n";
+			cout << "\t Date Married : " << put_time(&marr, "%d %b %Y") << "\n";
+			output << "\t Date Married : " << put_time(&marr, "%d %b %Y") << "\n";
+		//}
 		for (std::vector<Person>::const_iterator itp = (*it).Children.begin(); itp!=(*it).Children.end(); ++itp) 
 		{
 			cout << "\t\t Child Name : " << (*itp).GivenName << "\n";
