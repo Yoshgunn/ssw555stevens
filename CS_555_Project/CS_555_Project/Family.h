@@ -10,6 +10,7 @@ public:
 	std::vector<Person> Children;
 	string Id;
 	std::tm Marriage;
+	std::tm Divorce;
 	Person Husband;
 	Person Wife;
 	

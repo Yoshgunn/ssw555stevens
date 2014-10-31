@@ -6,12 +6,28 @@
 
 int CompareDates(std::tm first,std::tm second)
 {
-	if((first.tm_year > second.tm_year || first.tm_year == second.tm_year) &&
-		(first.tm_mon > second.tm_mon || first.tm_mon == second.tm_mon) &&
-		(first.tm_mday > second.tm_mday)) 
-		return 1;
-	else if( first.tm_year == second.tm_year && first.tm_mon == second.tm_mon && first.tm_mday == second.tm_mday)
+	// 1	First came later
+	// 0	Same date
+	// -1	First came before
+
+	if((first.tm_year == second.tm_year) && (first.tm_mon == second.tm_mon) && (first.tm_mday == second.tm_mday))
+	{
+		cout << "Same date." << endl;
 		return 0;
+	}
+	else if( first.tm_year > second.tm_year )
+		return 1;
+	else if ( first.tm_year < second.tm_year )
+	{
+		// cout << first.tm_year << " is before " << second.tm_year << endl;
+		return -1;
+	}
+	else if ( first.tm_mon > second.tm_mon )
+		return 1;
+	else if ( first.tm_mon < second.tm_mon )
+		return -1;
+	else if ( first.tm_mday > second.tm_mday )
+		return 1;
 	else
 		return -1;
 }
@@ -184,7 +200,12 @@ std::vector<Family> GetFamilies(std::vector<Person> people)
 					{
 						f.Id = buf;
 						f.Children.clear();
-						//f.Marriage = "";
+						f.Marriage.tm_year = 0;
+						f.Marriage.tm_mon = 0;
+						f.Marriage.tm_mday = 0;
+						f.Divorce.tm_year = 0;
+						f.Divorce.tm_mon = 0;
+						f.Divorce.tm_mday = 0;
 					}
 					else if(buf =="HUSB")
 					{
@@ -208,9 +229,14 @@ std::vector<Family> GetFamilies(std::vector<Person> people)
 					else if( buf =="MARR")
 					{
 						getline(myfile, line);
-						//f.Marriage = line.substr(7);
 						std::tm ds = try_get_date(line.substr(7));
 						f.Marriage = ds;
+					}
+					else if ( buf =="DIV")
+					{
+						getline(myfile, line);
+						std::tm ds = try_get_date(line.substr(7));
+						f.Divorce = ds;
 					}
 				}
 				index++;
@@ -270,13 +296,52 @@ int _tmain(int argc, _TCHAR* argv[])
 			output << "* *ERROR FOUND: Wives must be Female!* *" << endl;
 
 		}
-		/*if ( (*it).Marriage != "")
-		{*/
-			std::tm marr = (*it).Marriage;
-			//cout << "\t\t| Birth Date :" << put_time(&marr, "%d %b %Y") << "\n";
+		
+		// Check for Marriages
+		std::tm marr = (*it).Marriage;
+		if ( marr.tm_year != 0 && marr.tm_mon != 0 && marr.tm_mday != 0 )
+		{
 			cout << "\t Date Married : " << put_time(&marr, "%d %b %Y") << "\n";
 			output << "\t Date Married : " << put_time(&marr, "%d %b %Y") << "\n";
-		//}
+
+			// Marriage Anomaly?
+			//    Marriage after one of the spouses died
+			if ( CompareDates( (*it).Husband.Death, marr ) == -1 )
+			{
+				// This code will not work. We need to set Death to NULL before we can do this.
+				// Additionally, we need to adjust the code to handle odd lines like 1 DEAT Y
+				// that do not provide a date.
+
+				// cout << "* *ERROR FOUND: Death occurs before marriage!* *" << endl;
+				// output << "* *ERROR FOUND: Death occurs before marriage!* *" << endl;
+			}
+			//    Marriage before one of the spouses was born
+			if ( CompareDates( marr, (*it).Husband.Birth ) == -1 )
+			{
+				cout << "* * ERROR FOUND: Husband married before he was born!* *" << endl;
+			}
+			if ( CompareDates( marr, (*it).Wife.Birth ) == -1 )
+			{
+				cout << "* * ERROR FOUND: Wife married before she was born!* *" << endl;
+			}
+		}
+
+		// Check for Divorces
+		std::tm div = (*it).Divorce;
+		if ( div.tm_year != 0 && div.tm_mon != 0 && div.tm_mday != 0 )
+		{
+			cout << "\t Date Divorced : " << put_time(&div, "%d %b %Y") << "\n";
+			output << "\t Date Divorced : " << put_time(&div, "%d %b %Y") << "\n";
+
+			// Divorce Anomaly?
+			if ( CompareDates( div, marr ) == -1 )
+			{
+				cout << "* *ERROR FOUND: Divorce occurs before marriage!* *" << endl;
+				cout << put_time(&div, "%d %b %Y") << " is before " << put_time(&marr, "%d %b %Y") << endl;
+				output << "* *ERROR FOUND: Divorce occurs before marriage!* *" << endl;
+			}
+		}
+
 		for (std::vector<Person>::const_iterator itp = (*it).Children.begin(); itp!=(*it).Children.end(); ++itp) 
 		{
 			cout << "\t\t Child Name : " << (*itp).GivenName << "\n";
