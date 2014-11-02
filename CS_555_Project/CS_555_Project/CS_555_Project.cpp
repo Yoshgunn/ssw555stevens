@@ -213,6 +213,12 @@ std::vector<Family> GetFamilies(std::vector<Person> people)
 					{
 						string id;
 						ss >> id;
+						if（f.Husband.Id != ""）
+						{
+							cout << "Line: " << f.linenum << "\t " << "* *ERROR FOUND: There are two husb!* *" << endl;
+							
+						}
+						else
 						f.Husband = FindPerson(id,people);
 						//ss >> f.GivenName;
 					}
@@ -220,6 +226,12 @@ std::vector<Family> GetFamilies(std::vector<Person> people)
 					{
 						string id;
 						ss >> id;
+						if（f.Wife.Id != ""）
+						{
+							cout << "Line: " << f.linenum << "\t " << "* *ERROR FOUND: There are two Wife!* *" << endl;
+							
+						}
+						else
 						f.Wife = FindPerson(id,people);
 					}
 					else if( buf =="CHIL")
