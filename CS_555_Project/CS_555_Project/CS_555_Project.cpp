@@ -213,7 +213,7 @@ std::vector<Family> GetFamilies(std::vector<Person> people)
 					{
 						string id;
 						ss >> id;
-						if（f.Husband.Id != ""）
+						if (f.Husband.Id != "")
 						{
 							cout << "Line: " << f.linenum << "\t " << "* *ERROR FOUND: There are two husb!* *" << endl;
 							
@@ -226,7 +226,7 @@ std::vector<Family> GetFamilies(std::vector<Person> people)
 					{
 						string id;
 						ss >> id;
-						if（f.Wife.Id != ""）
+						if (f.Wife.Id != "")
 						{
 							cout << "Line: " << f.linenum << "\t " << "* *ERROR FOUND: There are two Wife!* *" << endl;
 							
