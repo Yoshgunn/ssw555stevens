@@ -13,7 +13,7 @@ public:
 	std::tm Divorce;
 	Person Husband;
 	Person Wife;
-	
+	int linenum;
 
 	Family()
 	{
