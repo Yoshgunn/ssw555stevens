@@ -238,6 +238,12 @@ std::vector<Family> GetFamilies(std::vector<Person> people)
 					{
 						string id;
 						ss >> id;
+						if(Children.size()>10)
+						{
+							cout<< " This family has more than 10 children " << endl;
+							
+						}
+						else
 						f.AddChild(FindPerson(id,people));
 					}
 					else if( buf =="MARR")
