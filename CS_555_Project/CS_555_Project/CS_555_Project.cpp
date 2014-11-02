@@ -240,7 +240,7 @@ std::vector<Family> GetFamilies(std::vector<Person> people)
 						ss >> id;
 						if(Children.size()>10)
 						{
-							cout<< " This family has more than 10 children " << endl;
+							cout<< "Line: " << f.linenum << "\t " <<"* *ERROR FOUND: This family has more than 10 children!* *" << endl;
 							
 						}
 						else
