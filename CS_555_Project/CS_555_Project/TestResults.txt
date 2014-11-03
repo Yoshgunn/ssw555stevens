@@ -1,15 +1,12 @@
+
 Family Id : @F1@
 	 Husband Name : Earl
 	 Wife Name : Angela
 	 Wife Birth : 29 Mar 1934
 	 Wife Death : 06 Sep 1930
+* *ERROR FOUND: Wife's death occurs before her birth!* *
 	 Date Married : 06 Aug 1954
-		 Child Name : Paula
-* *ERROR FOUND: Child's birth occurs after mother's death!* *
-		 Child Name : Joshua
-* *ERROR FOUND: Child's birth occurs before father's birth!* *
-* *ERROR FOUND: Child's birth occurs before mother's birth!* *
-* *ERROR FOUND: Child's birth occurs after mother's death!* *
+
 Family Id : @F2@
 	 Husband Name : David
 	 Husband Birth : 12 Mar 1962
@@ -18,71 +15,44 @@ Family Id : @F2@
 	 Date Married : 16 Jun 1999
 	 Date Divorced : 20 Aug 1996
 * *ERROR FOUND: Divorce occurs before marriage!* *
-		 Child Name : Shannon
-* *ERROR FOUND: Child's birth occurs after mother's death!* *
+
 Family Id : @F3@
 	 Husband Name : Jerry
 	 Husband Birth : 18 Apr 1955
 	 Wife Name : Paula
 	 Wife Birth : 12 Apr 1960
 	 Date Married : 08 Dec 1954
+* * ERROR FOUND: Husband married before he was born!* *
+* * ERROR FOUND: Wife married before she was born!* *
 	 Date Divorced : 25 Jun 1995
-		 Child Name : Angela
-* *ERROR FOUND: Child's birth occurs after mother's death!* *
-		 Child Name : Andrew
-* *ERROR FOUND: Child's birth occurs after mother's death!* *
+
 Family Id : @F4@
 	 Husband Name : Andrew
 	 Husband Birth : 03 Feb 1988
 	 Wife Name : Jillian
 	 Wife Birth : 03 Aug 1989
+
 Family Id : @F5@
-* *ERROR FOUND: Both spouses are the same gender!* *
 	 Husband Name : Joshua
 	 Husband Birth : 07 Dec 1931
 	 Wife Name : Alice
 * *ERROR FOUND: Wives must be Female!* *
 	 Wife Birth : 01 Oct 1960
 	 Date Married : 15 Apr 1984
-		 Child Name : Danielle
-* *ERROR FOUND: Child's birth occurs after mother's death!* *
+
 Family Id : @F6@
 	 Husband Name : Alice
 	 Husband Birth : 01 Oct 1960
 	 Wife Name : Scarlet
 	 Wife Birth : 08 Oct 1959
 	 Date Married : 08 Nov 1985
-		 Child Name : Alex
-* *ERROR FOUND: Child's birth occurs before father's birth!* *
-* *ERROR FOUND: Child's birth occurs before mother's birth!* *
-* *ERROR FOUND: Child's birth occurs after mother's death!* *
-		 Child Name : Sabrina
-* *ERROR FOUND: Child's birth occurs after mother's death!* *
-		 Child Name : Dan
-* *ERROR FOUND: Child's birth occurs after mother's death!* *
-		 Child Name : Bradley
-* *ERROR FOUND: Child's birth occurs after mother's death!* *
-		 Child Name : Nicholas
-* *ERROR FOUND: Child's birth occurs after mother's death!* *
-		 Child Name : Kaley
-* *ERROR FOUND: Child's birth occurs after mother's death!* *
-		 Child Name : Anita
-* *ERROR FOUND: Child's birth occurs after mother's death!* *
-		 Child Name : Quinn
-* *ERROR FOUND: Child's birth occurs after mother's death!* *
-		 Child Name : Eric
-* *ERROR FOUND: Child's birth occurs after mother's death!* *
-		 Child Name : Andrew
-* *ERROR FOUND: Child's birth occurs after mother's death!* *
-		 Child Name : Noble
-* *ERROR FOUND: Child's birth occurs after mother's death!* *
+
 Family Id : @F7@
 	 Husband Name : Alice
 	 Husband Birth : 01 Oct 1960
 	 Wife Name : Scarlet
 	 Wife Birth : 08 Oct 1959
-		 Child Name : Alice
-* *ERROR FOUND: Child's birth occurs after mother's death!* *
+
 Family Id : @F8@
 	 Husband Name : Alex
 	 Husband Birth : 14 Jul 1983
