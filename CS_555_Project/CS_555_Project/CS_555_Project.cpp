@@ -317,6 +317,20 @@ int _tmain(int argc, _TCHAR* argv[])
 			output << "\t Husband Birth : " << put_time(&husbBirth, "%d %b %Y") << "\n";
 		}
 
+		// Husband's Death
+		std::tm husbDeath = (*it).Husband.Death;
+		if ( husbDeath.tm_year >= 0 && husbDeath.tm_mon >= 0 && husbDeath.tm_mday >= 0 )
+		{
+			cout << "\t Husband Death : " << put_time(&husbDeath, "%d %b %Y") << "\n";
+			output << "\t Husband Death : " << put_time(&husbDeath, "%d %b %Y") << "\n";
+
+			// Check if died before born
+			if( CompareDates( husbBirth, husbDeath ) == 1 ) {
+				cout << "* *ERROR FOUND: Husband's death occurs before his birth!* *" << endl;
+				output << "* *ERROR FOUND: Husband's death occurs before his birth!* *" << endl;
+			}
+		}
+
 		cout << "\t Wife Name : " << (*it).Wife.GivenName << "\n";
 		output << "\t Wife Name : " << (*it).Wife.GivenName << "\n";
 		if((*it).Wife.Sex!="F")
@@ -340,6 +354,12 @@ int _tmain(int argc, _TCHAR* argv[])
 		{
 			cout << "\t Wife Death : " << put_time(&wifeDeath, "%d %b %Y") << "\n";
 			output << "\t Wife Death : " << put_time(&wifeDeath, "%d %b %Y") << "\n";\
+
+			// Check if died before born
+			if( CompareDates( wifeBirth, wifeDeath ) == 1 ) {
+				cout << "* *ERROR FOUND: Wife's death occurs before her birth!* *" << endl;
+				output << "* *ERROR FOUND: Wife's death occurs before her birth!* *" << endl;
+			}
 		}
 
 		// Check for Marriages
@@ -396,6 +416,17 @@ int _tmain(int argc, _TCHAR* argv[])
 			if ( childBirth.tm_year != 0 && childBirth.tm_mon != 0 && childBirth.tm_mday != 0 )
 			{
 				cout << "\t\t Child Birth : " << put_time(&childBirth, "%d %b %Y") << "\n";
+			}
+
+			std::tm childDeath = (*itp).Death;
+			if ( childDeath.tm_year >= 0 && childDeath.tm_mon >= 0 && childDeath.tm_mday >= 0 )
+			{
+				cout << "\t\t Child Death : " << put_time(&childDeath, "%d %b %Y") << "\n";
+
+				if( CompareDates( childBirth, childDeath ) == 1 ) {
+					cout << "* *ERROR FOUND: Child's death occurs before his/her birth!* *" << endl;
+					output << "* *ERROR FOUND: Child's death occurs before his/her birth!* *" << endl;
+				}
 			}
 
 			// Check if born before father's birth
