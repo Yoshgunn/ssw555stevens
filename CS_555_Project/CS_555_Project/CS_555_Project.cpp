@@ -166,7 +166,7 @@ Person *FindPerson(string id, std::vector<Person> &people)
 			 return &*it;
 	 }
 }
-std::vector<Family> GetFamilies(std::vector<Person> &people)
+std::vector<Family> GetFamilies(std::vector<Person> &people, ofstream &output)
 {
 	string line;
 	int linenum = 0;
@@ -219,7 +219,7 @@ std::vector<Family> GetFamilies(std::vector<Person> &people)
 						if (f.Husband.Id != "")
 						{
 							cout << "Line: " << linenum << "\t " << "* *ERROR FOUND: There are two husb!* *" << endl;
-							
+							output << "Line: " << linenum << "\t " << "* *ERROR FOUND: There are two husb!* *" << endl;
 						}
 						else 
 						f.Husband = *FindPerson(id,people);
@@ -232,7 +232,7 @@ std::vector<Family> GetFamilies(std::vector<Person> &people)
 						if (f.Wife.Id != "")
 						{
 							cout << "Line: " << linenum << "\t " << "* *ERROR FOUND: There are two Wife!* *" << endl;
-							
+							output << "Line: " << linenum << "\t " << "* *ERROR FOUND: There are two Wife!* *" << endl;
 						}
 						else 
 						f.Wife = *FindPerson(id,people);
@@ -288,11 +288,10 @@ int _tmain(int argc, _TCHAR* argv[])
 			break;
 
 	}*/
-	
-	std::vector<Person> people = GetPeople();
-	std::vector<Family> families = GetFamilies(people);
-
 	ofstream output("TestResults.txt");
+
+	std::vector<Person> people = GetPeople();
+	std::vector<Family> families = GetFamilies(people,output);
 	
 	for (std::vector<Family>::const_iterator it = families.begin(); it!=families.end(); ++it) 
 	{
@@ -373,8 +372,10 @@ int _tmain(int argc, _TCHAR* argv[])
 		}
 		// Check siblings
 		if ((it->Husband.Mother) && (it->Husband.Mother == it->Wife.Mother) || (it->Husband.Father) && (it->Husband.Father == it->Wife.Father))
-			cout  << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Marriage contains siblings!* *" << endl;
-		
+		{
+			cout << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Marriage contains siblings!* *" << endl;
+			output << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Marriage contains siblings!* *" << endl;
+		}
 		// Check for Marriages
 		std::tm marr = (*it).Marriage;
 		if ( marr.tm_year != 0 && marr.tm_mon != 0 && marr.tm_mday != 0 )
@@ -425,7 +426,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		if (it->Children.size() >= 10)
 		{
 			cout << "Line: " << it->linenum << "\t " << "* *ERROR FOUND: This family has more than 10 children!* *" << endl;
-
+			output << "Line: " << it->linenum << "\t " << "* *ERROR FOUND: This family has more than 10 children!* *" << endl;
 		}
 		for (std::vector<Person>::const_iterator itp = (*it).Children.begin(); itp!=(*it).Children.end(); ++itp) 
 		{
@@ -478,4 +479,3 @@ int _tmain(int argc, _TCHAR* argv[])
 	cin >> p;
 	return 0;
 }
-
