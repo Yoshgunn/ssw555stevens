@@ -4,6 +4,8 @@
 #include "stdafx.h"
 #include "Family.h"
 
+
+
 int CompareDates(std::tm first,std::tm second)
 {
 	// 1	First came later
@@ -156,15 +158,15 @@ std::vector<Person> GetPeople()
 		cout << "Couldn't find the requested file." << endl;
 	}
 }
-Person FindPerson(string id, std::vector<Person> people)
+Person *FindPerson(string id, std::vector<Person> &people)
 {
 	 for (std::vector<Person>::iterator it = people.begin() ; it != people.end(); ++it)
 	 {
 		 if((*it).Id== id)
-			 return *it;
+			 return &*it;
 	 }
 }
-std::vector<Family> GetFamilies(std::vector<Person> people)
+std::vector<Family> GetFamilies(std::vector<Person> &people)
 {
 	string line;
 	int linenum = 0;
@@ -220,7 +222,7 @@ std::vector<Family> GetFamilies(std::vector<Person> people)
 							
 						}
 						else 
-						f.Husband = FindPerson(id,people);
+						f.Husband = *FindPerson(id,people);
 						//ss >> f.GivenName;
 					}
 					else if(buf =="WIFE")
@@ -233,13 +235,16 @@ std::vector<Family> GetFamilies(std::vector<Person> people)
 							
 						}
 						else 
-						f.Wife = FindPerson(id,people);
+						f.Wife = *FindPerson(id,people);
 					}
 					else if( buf =="CHIL")
 					{
 						string id;
 						ss >> id;
-						f.AddChild(FindPerson(id,people));
+						auto child = FindPerson(id, people);
+						child->Mother = &f.Wife;
+						child->Father = &f.Husband;
+						f.AddChild(*child);
 					}
 					else if( buf =="MARR")
 					{
@@ -366,7 +371,10 @@ int _tmain(int argc, _TCHAR* argv[])
 					}
 			}
 		}
-
+		// Check siblings
+		if ((it->Husband.Mother) && (it->Husband.Mother == it->Wife.Mother) || (it->Husband.Father) && (it->Husband.Father == it->Wife.Father))
+			cout  << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Marriage contains siblings!* *" << endl;
+		
 		// Check for Marriages
 		std::tm marr = (*it).Marriage;
 		if ( marr.tm_year != 0 && marr.tm_mon != 0 && marr.tm_mday != 0 )
