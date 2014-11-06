@@ -15,7 +15,7 @@ public:
 	std::tm Death;
 	string LegalName;
 	Person *Spouse;
-	Person *Mother;
-	Person *Father;
+	Person *Mother = NULL;
+	Person *Father = NULL;
 };
 
