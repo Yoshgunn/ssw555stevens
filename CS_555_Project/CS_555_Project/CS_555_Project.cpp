@@ -88,7 +88,7 @@ std::vector<Person> GetPeople()
 			{
 				if(totalPep >0)
 				people.push_back(p);
-				Person p;
+				p=Person();
 				totalPep++;
 			}
 			//cout << "Original Line: \"" << line <<"\"";
@@ -167,7 +167,7 @@ Person FindPerson(string id, std::vector<Person> people)
 std::vector<Family> GetFamilies(std::vector<Person> people)
 {
 	string line;
-	// linenum=0;
+	int linenum = 0;
 	 //ifstream myfile("C:\\Users\\Dipan\\Documents\\GitHub\\ssw555stevens\\CS_555_Project\\CS_555_Project\\Debug\\AcceptanceTestFile.ged", ios::in);
 	ifstream myfile("Debug\\AcceptanceTestFile.ged", ios::in);
 
@@ -178,14 +178,15 @@ std::vector<Family> GetFamilies(std::vector<Person> people)
 		int totalPep=0;
 		while (getline(myfile,line) )
 		{
-			// linenum++;
+			linenum++;
 			if(line.substr(0,4) == "0 @F")
 			{
 				if(totalPep >0)
 				{
 					familyColl.push_back(f);
 				}
-				Family f;
+				f=Family();
+				f.linenum = linenum;
 				totalPep++;
 			}
 			//cout << "Original Line: \"" << line <<"\"";
@@ -213,12 +214,12 @@ std::vector<Family> GetFamilies(std::vector<Person> people)
 					{
 						string id;
 						ss >> id;
-						/*if (f.Husband.Id != "")
+						if (f.Husband.Id != "")
 						{
-							cout << "Line: " << f.linenum << "\t " << "* *ERROR FOUND: There are two husb!* *" << endl;
+							cout << "Line: " << linenum << "\t " << "* *ERROR FOUND: There are two husb!* *" << endl;
 							
 						}
-						else */
+						else 
 						f.Husband = FindPerson(id,people);
 						//ss >> f.GivenName;
 					}
@@ -226,35 +227,31 @@ std::vector<Family> GetFamilies(std::vector<Person> people)
 					{
 						string id;
 						ss >> id;
-						/*if (f.Wife.Id != "")
+						if (f.Wife.Id != "")
 						{
-							cout << "Line: " << f.linenum << "\t " << "* *ERROR FOUND: There are two Wife!* *" << endl;
+							cout << "Line: " << linenum << "\t " << "* *ERROR FOUND: There are two Wife!* *" << endl;
 							
 						}
-						else */
+						else 
 						f.Wife = FindPerson(id,people);
 					}
 					else if( buf =="CHIL")
 					{
 						string id;
 						ss >> id;
-						/* if(Children.size()>10)
-						{
-							cout<< "Line: " << f.linenum << "\t " <<"* *ERROR FOUND: This family has more than 10 children!* *" << endl;
-							
-						}
-						else
-						f.AddChild(FindPerson(id,people)); */
+						f.AddChild(FindPerson(id,people));
 					}
 					else if( buf =="MARR")
 					{
 						getline(myfile, line);
+						linenum++;
 						std::tm ds = try_get_date(line.substr(7));
 						f.Marriage = ds;
 					}
 					else if ( buf =="DIV")
 					{
 						getline(myfile, line);
+						linenum++;
 						std::tm ds = try_get_date(line.substr(7));
 						f.Divorce = ds;
 					}
@@ -296,72 +293,77 @@ int _tmain(int argc, _TCHAR* argv[])
 	{
 		cout << endl << "Family Id : " << (*it).Id << "\n";
 		output << endl << "Family Id : " << (*it).Id << "\n";
-		if((*it).Husband.Sex==(*it).Wife.Sex)
+		if (it->Husband.Id != "")
 		{
-			// cout << "Line: " << f.linenum << "\t " <<"* *ERROR FOUND: Both spouses are the same gender!* *" << endl;
-			// output << "Line: " << f.linenum << "\t " << "* *ERROR FOUND: Both spouses are the same gender!* *" << endl;
-		}
-		cout << "\t Husband Name : " << (*it).Husband.GivenName << "\n";
-		output << "\t Husband Name : " << (*it).Husband.GivenName << "\n";
-		if((*it).Husband.Sex!="M")
-	   	{
-	   		// cout << "Line: " << f.linenum << "\t " << "* *ERROR FOUND: Husbands must be Male!* *" << endl;
-			// output << "Line: " << f.linenum << "\t " << "* *ERROR FOUND: Husbands must be Male!* *" << endl;
-			output << "* *ERROR FOUND: Husbands must be Male!* *" << endl;
-	   	}
-
-		// Husband's Birth
-		std::tm husbBirth = (*it).Husband.Birth;
-		if ( husbBirth.tm_year != 0 && husbBirth.tm_mon != 0 && husbBirth.tm_mday != 0 )
-		{
-			cout << "\t Husband Birth : " << put_time(&husbBirth, "%d %b %Y") << "\n";
-			output << "\t Husband Birth : " << put_time(&husbBirth, "%d %b %Y") << "\n";
-		}
-
-		// Husband's Death
-		std::tm husbDeath = (*it).Husband.Death;
-		if ( husbDeath.tm_year >= 0 && husbDeath.tm_mon >= 0 && husbDeath.tm_mday >= 0 )
-		{
-			cout << "\t Husband Death : " << put_time(&husbDeath, "%d %b %Y") << "\n";
-			output << "\t Husband Death : " << put_time(&husbDeath, "%d %b %Y") << "\n";
-
-			// Check if died before born
-			if( CompareDates( husbBirth, husbDeath ) == 1 ) 
+			if ((*it).Husband.Sex == (*it).Wife.Sex)
 			{
-				cout << "* *ERROR FOUND: Husband's death occurs before his birth!* *" << endl;
-				output << "* *ERROR FOUND: Husband's death occurs before his birth!* *" << endl;
+				cout << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Both spouses are the same gender!* *" << endl;
+				output << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Both spouses are the same gender!* *" << endl;
+			}
+			cout << "\t Husband Name : " << (*it).Husband.GivenName << "\n";
+			output << "\t Husband Name : " << (*it).Husband.GivenName << "\n";
+			if ((*it).Husband.Sex != "M")
+			{
+				cout << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Husbands must be Male!* *" << endl;
+				output << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Husbands must be Male!* *" << endl;
+				output << "* *ERROR FOUND: Husbands must be Male!* *" << endl;
+			}
+
+			// Husband's Birth
+			std::tm husbBirth = (*it).Husband.Birth;
+			if (husbBirth.tm_year != 0 && husbBirth.tm_mon != 0 && husbBirth.tm_mday != 0)
+			{
+				cout << "\t Husband Birth : " << put_time(&husbBirth, "%d %b %Y") << "\n";
+				output << "\t Husband Birth : " << put_time(&husbBirth, "%d %b %Y") << "\n";
+			}
+
+			// Husband's Death
+			std::tm husbDeath = (*it).Husband.Death;
+			if (husbDeath.tm_year >= 0 && husbDeath.tm_mon >= 0 && husbDeath.tm_mday >= 0)
+			{
+				cout << "\t Husband Death : " << put_time(&husbDeath, "%d %b %Y") << "\n";
+				output << "\t Husband Death : " << put_time(&husbDeath, "%d %b %Y") << "\n";
+
+				// Check if died before born
+				if (CompareDates(husbBirth, husbDeath) == 1)
+				{
+					cout << "* *ERROR FOUND: Husband's death occurs before his birth!* *" << endl;
+					output << "* *ERROR FOUND: Husband's death occurs before his birth!* *" << endl;
+				}
 			}
 		}
-
-		cout << "\t Wife Name : " << (*it).Wife.GivenName << "\n";
-		output << "\t Wife Name : " << (*it).Wife.GivenName << "\n";
-		if((*it).Wife.Sex!="F")
+		if (it->Husband.Id != "")
 		{
-			// cout << "Line: " << f.linenum << "\t " << "* *ERROR FOUND: Wives must be Female!* *" << endl;
-			// output << "Line: " << f.linenum << "\t " << "* *ERROR FOUND: Wives must be Female!* *" << endl;
-			output << "* *ERROR FOUND: Wives must be Female!* *" << endl;
+			cout << "\t Wife Name : " << (*it).Wife.GivenName << "\n";
+			output << "\t Wife Name : " << (*it).Wife.GivenName << "\n";
+			if ((*it).Wife.Sex != "F")
+			{
+				cout << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Wives must be Female!* *" << endl;
+				output << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Wives must be Female!* *" << endl;
+				output << "* *ERROR FOUND: Wives must be Female!* *" << endl;
 
-		}
+			}
 
-		// Wife's Birth
-		std::tm wifeBirth = (*it).Wife.Birth;
-		if ( wifeBirth.tm_year != 0 && wifeBirth.tm_mon != 0 && wifeBirth.tm_mday != 0 )
-		{
-			cout << "\t Wife Birth : " << put_time(&wifeBirth, "%d %b %Y") << "\n";
-			output << "\t Wife Birth : " << put_time(&wifeBirth, "%d %b %Y") << "\n";
-		}
+			// Wife's Birth
+			std::tm wifeBirth = (*it).Wife.Birth;
+			if (wifeBirth.tm_year != 0 && wifeBirth.tm_mon != 0 && wifeBirth.tm_mday != 0)
+			{
+				cout << "\t Wife Birth : " << put_time(&wifeBirth, "%d %b %Y") << "\n";
+				output << "\t Wife Birth : " << put_time(&wifeBirth, "%d %b %Y") << "\n";
+			}
 
-		// Wife's Death
-		std::tm wifeDeath = (*it).Wife.Death;
-		if ( wifeDeath.tm_year >= 0 && wifeDeath.tm_mon >= 0 && wifeDeath.tm_mday >= 0 )
-		{
-			cout << "\t Wife Death : " << put_time(&wifeDeath, "%d %b %Y") << "\n";
-			output << "\t Wife Death : " << put_time(&wifeDeath, "%d %b %Y") << "\n";\
+			// Wife's Death
+			std::tm wifeDeath = (*it).Wife.Death;
+			if (wifeDeath.tm_year >= 0 && wifeDeath.tm_mon >= 0 && wifeDeath.tm_mday >= 0)
+			{
+				cout << "\t Wife Death : " << put_time(&wifeDeath, "%d %b %Y") << "\n";
+				output << "\t Wife Death : " << put_time(&wifeDeath, "%d %b %Y") << "\n"; \
 
-			// Check if died before born
-			if( CompareDates( wifeBirth, wifeDeath ) == 1 ) {
-				cout << "* *ERROR FOUND: Wife's death occurs before her birth!* *" << endl;
-				output << "* *ERROR FOUND: Wife's death occurs before her birth!* *" << endl;
+					// Check if died before born
+					if (CompareDates(wifeBirth, wifeDeath) == 1) {
+					cout << "* *ERROR FOUND: Wife's death occurs before her birth!* *" << endl;
+					output << "* *ERROR FOUND: Wife's death occurs before her birth!* *" << endl;
+					}
 			}
 		}
 
@@ -386,12 +388,12 @@ int _tmain(int argc, _TCHAR* argv[])
 			//    Marriage before one of the spouses was born
 			if ( CompareDates( marr, (*it).Husband.Birth ) == -1 )
 			{
-				// cout << "Line: " << f.linenum << "\t " << "* * ERROR FOUND: Husband married before he was born!* *" << endl;
+				cout << "Line: " << (*it).linenum << "\t " << "* * ERROR FOUND: Husband married before he was born!* *" << endl;
 				output << "* * ERROR FOUND: Husband married before he was born!* *" << endl;
 			}
 			if ( CompareDates( marr, (*it).Wife.Birth ) == -1 )
 			{
-				// cout << "Line: " << f.linenum << "\t " << "* * ERROR FOUND: Wife married before she was born!* *" << endl;
+				cout << "Line: " << (*it).linenum << "\t " << "* * ERROR FOUND: Wife married before she was born!* *" << endl;
 				output << "* * ERROR FOUND: Wife married before she was born!* *" << endl;
 			}
 		}
@@ -406,13 +408,17 @@ int _tmain(int argc, _TCHAR* argv[])
 			// Divorce Anomaly?
 			if ( CompareDates( div, marr ) == -1 )
 			{
-				// cout << "Line: " << f.linenum << "\t " << "* *ERROR FOUND: Divorce occurs before marriage!* *" << endl;
+				cout << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Divorce occurs before marriage!* *" << endl;
 				cout << put_time(&div, "%d %b %Y") << " is before " << put_time(&marr, "%d %b %Y") << endl;
-				// output << "Line: " << f.linenum << "\t " << "* *ERROR FOUND: Divorce occurs before marriage!* *" << endl;
+				output << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Divorce occurs before marriage!* *" << endl;
 				output << "* *ERROR FOUND: Divorce occurs before marriage!* *" << endl;
 			}
 		}
+		if (it->Children.size() >= 10)
+		{
+			cout << "Line: " << it->linenum << "\t " << "* *ERROR FOUND: This family has more than 10 children!* *" << endl;
 
+		}
 		for (std::vector<Person>::const_iterator itp = (*it).Children.begin(); itp!=(*it).Children.end(); ++itp) 
 		{
 			cout << "\t\t Child Name : " << (*itp).GivenName << "\n";
@@ -436,19 +442,19 @@ int _tmain(int argc, _TCHAR* argv[])
 			}
 
 			// Check if born before father's birth
-			if( CompareDates( childBirth, husbBirth ) == -1) {
+			if (CompareDates(childBirth, (*it).Husband.Birth) == -1) {
 				cout << "* *ERROR FOUND: Child's birth occurs before father's birth!* *" << endl;
 				output << "* *ERROR FOUND: Child's birth occurs before father's birth!* *" << endl;
 			}
 
 			// Check if born before mother's birth
-			if( CompareDates( childBirth, wifeBirth ) == -1) {
+			if (CompareDates(childBirth, (*it).Wife.Birth) == -1) {
 				cout << "* *ERROR FOUND: Child's birth occurs before mother's birth!* *" << endl;
 				output << "* *ERROR FOUND: Child's birth occurs before mother's birth!* *" << endl;
 			}
 
 			// Check if born after mother's death
-			if( CompareDates( childBirth, wifeDeath ) == 1 && (*it).Wife.Death.tm_year >= 0 && (*it).Wife.Death.tm_mon >= 0 && (*it).Wife.Death.tm_mday >= 0 ) {
+			if (CompareDates(childBirth, (*it).Wife.Death) == 1 && (*it).Wife.Death.tm_year >= 0 && (*it).Wife.Death.tm_mon >= 0 && (*it).Wife.Death.tm_mday >= 0) {
 				cout << "* *ERROR FOUND: Child's birth occurs after mother's death!* *" << endl;
 				output << "* *ERROR FOUND: Child's birth occurs after mother's death!* *" << endl;
 			}
