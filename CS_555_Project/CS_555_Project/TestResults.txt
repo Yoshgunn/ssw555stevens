@@ -1,3 +1,4 @@
+Line: 250	 * *ERROR FOUND: There are two husb!* *
 
 Family Id : @F1@
 	 Husband Name : Earl
@@ -6,6 +7,12 @@ Family Id : @F1@
 	 Wife Death : 06 Sep 1930
 * *ERROR FOUND: Wife's death occurs before her birth!* *
 	 Date Married : 06 Aug 1954
+		 Child Name : Paula
+* *ERROR FOUND: Child's birth occurs after mother's death!* *
+		 Child Name : Joshua
+* *ERROR FOUND: Child's birth occurs before father's birth!* *
+* *ERROR FOUND: Child's birth occurs before mother's birth!* *
+* *ERROR FOUND: Child's birth occurs after mother's death!* *
 
 Family Id : @F2@
 	 Husband Name : David
@@ -14,7 +21,9 @@ Family Id : @F2@
 	 Wife Birth : 12 Apr 1960
 	 Date Married : 16 Jun 1999
 	 Date Divorced : 20 Aug 1996
+Line: 214	 * *ERROR FOUND: Divorce occurs before marriage!* *
 * *ERROR FOUND: Divorce occurs before marriage!* *
+		 Child Name : Shannon
 
 Family Id : @F3@
 	 Husband Name : Jerry
@@ -25,6 +34,8 @@ Family Id : @F3@
 * * ERROR FOUND: Husband married before he was born!* *
 * * ERROR FOUND: Wife married before she was born!* *
 	 Date Divorced : 25 Jun 1995
+		 Child Name : Angela
+		 Child Name : Andrew
 
 Family Id : @F4@
 	 Husband Name : Andrew
@@ -33,12 +44,15 @@ Family Id : @F4@
 	 Wife Birth : 03 Aug 1989
 
 Family Id : @F5@
+Line: 239	 * *ERROR FOUND: Both spouses are the same gender!* *
 	 Husband Name : Joshua
 	 Husband Birth : 07 Dec 1931
 	 Wife Name : Alice
+Line: 239	 * *ERROR FOUND: Wives must be Female!* *
 * *ERROR FOUND: Wives must be Female!* *
 	 Wife Birth : 01 Oct 1960
 	 Date Married : 15 Apr 1984
+		 Child Name : Danielle
 
 Family Id : @F6@
 	 Husband Name : Alice
@@ -46,15 +60,33 @@ Family Id : @F6@
 	 Wife Name : Scarlet
 	 Wife Birth : 08 Oct 1959
 	 Date Married : 08 Nov 1985
+Line: 248	 * *ERROR FOUND: This family has more than 10 children!* *
+		 Child Name : Alex
+* *ERROR FOUND: Child's birth occurs before father's birth!* *
+* *ERROR FOUND: Child's birth occurs before mother's birth!* *
+		 Child Name : Sabrina
+		 Child Name : Dan
+		 Child Name : Bradley
+		 Child Name : Nicholas
+		 Child Name : Kaley
+		 Child Name : Anita
+		 Child Name : Quinn
+		 Child Name : Eric
+		 Child Name : Andrew
+		 Child Name : Noble
 
 Family Id : @F7@
-	 Husband Name : Alice
-	 Husband Birth : 01 Oct 1960
-	 Wife Name : Scarlet
-	 Wife Birth : 08 Oct 1959
+		 Child Name : Alice
 
 Family Id : @F8@
 	 Husband Name : Alex
 	 Husband Birth : 14 Jul 1983
 	 Wife Name : Danielle
 	 Wife Birth : 17 Jun 1985
+
+Family Id : @F9@
+	 Husband Name : Eric
+	 Husband Birth : 05 Jul 1990
+	 Wife Name : Quinn
+	 Wife Birth : 07 Jun 1989
+Line: 274	 * *ERROR FOUND: Marriage contains siblings!* *
