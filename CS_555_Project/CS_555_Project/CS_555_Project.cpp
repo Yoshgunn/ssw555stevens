@@ -183,7 +183,7 @@ Person *FindPerson(string id, std::vector<Person> &people)
 }
 
 /*
-*	UC12: Everyone have unique id
+*	US-12: Everyone have unique id
 */
 void checkIds(std::vector<Person> &people) {
 	int count = 0;
@@ -194,7 +194,7 @@ void checkIds(std::vector<Person> &people) {
 
 		for(int i = 0; !duplicate && i < count; i++) {
 			if((*it).Id == uids[i]) {
-				cout << "* *ERROR FOUND: Duplicate ID (" << (*it).Id << ") found!* *\n" << endl;
+				cout << "US-12 ERROR: Duplicate ID (" << (*it).Id << ") found!\n" << endl;
 				duplicate = true;
 			}
 		}
@@ -257,10 +257,8 @@ std::vector<Family> GetFamilies(std::vector<Person> &people, ofstream &output)
 						string id;
 						ss >> id;
 						if (f.Husband.Id != "")
-						{
-							cout << "Line: " << linenum << "\t " << "* *ERROR FOUND: There are two husbands in this marriage!* *" << endl;
-							output << "Line: " << linenum << "\t " << "* *ERROR FOUND: There are two husbands in this marriage!* *" << endl;
-						}
+							output << "US-15 ERROR: There are two husbands in this marriage!" << "\t\t Line ???" << endl;
+
 						else 
 						f.Husband = *FindPerson(id,people);
 						//ss >> f.GivenName;
@@ -270,10 +268,8 @@ std::vector<Family> GetFamilies(std::vector<Person> &people, ofstream &output)
 						string id;
 						ss >> id;
 						if (f.Wife.Id != "")
-						{
-							cout << "Line: " << linenum << "\t " << "* *ERROR FOUND: There are two Wife!* *" << endl;
-							output << "Line: " << linenum << "\t " << "* *ERROR FOUND: There are two Wife!* *" << endl;
-						}
+							output << "US-15 ERROR: There are two wives!" << "\t\t Line ???" << endl;
+
 						else 
 						f.Wife = *FindPerson(id,people);
 					}
@@ -349,12 +345,9 @@ int _tmain(int argc, _TCHAR* argv[])
 			}
 			cout << "\t Husband Name : " << (*it).Husband.GivenName << "\n";
 			output << "\t Husband Name : " << (*it).Husband.GivenName << "\n";
+
 			if ((*it).Husband.Sex != "M")
-			{
-				cout << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Husbands must be Male!* *" << endl;
-				output << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Husbands must be Male!* *" << endl;
-				output << "* *ERROR FOUND: Husbands must be Male!* *" << endl;
-			}
+				output << "US-13 ERROR: Husbands must be Male!" << "\t\t\t\t Line " << (*it).linenum << endl;
 
 			// Husband's Birth
 			std::tm husbBirth = (*it).Husband.Birth;
@@ -383,13 +376,9 @@ int _tmain(int argc, _TCHAR* argv[])
 		{
 			cout << "\t Wife Name : " << (*it).Wife.GivenName << "\n";
 			output << "\t Wife Name : " << (*it).Wife.GivenName << "\n";
-			if ((*it).Wife.Sex != "F")
-			{
-				cout << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Wives must be Female!* *" << endl;
-				output << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Wives must be Female!* *" << endl;
-				output << "* *ERROR FOUND: Wives must be Female!* *" << endl;
 
-			}
+			if ((*it).Wife.Sex != "F")
+				output << "US-14 ERROR: Wives must be Female!" << "\t\t\t\t Line " << (*it).linenum << endl;
 
 			// Wife's Birth
 			std::tm wifeBirth = (*it).Wife.Birth;
@@ -404,7 +393,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			if (wifeDeath.tm_year >= 0 && wifeDeath.tm_mon >= 0 && wifeDeath.tm_mday >= 0)
 			{
 				cout << "\t Wife Death : " << put_time(&wifeDeath, "%d %b %Y") << "\n";
-				output << "\t Wife Death : " << put_time(&wifeDeath, "%d %b %Y") << "\n"; \
+				output << "\t Wife Death : " << put_time(&wifeDeath, "%d %b %Y") << "\n";
 
 					// Check if died before born
 					if (CompareDates(wifeBirth, wifeDeath) == 1) 
@@ -427,28 +416,19 @@ int _tmain(int argc, _TCHAR* argv[])
 			// Marriage Anomaly?
 			//    Marriage after one of the spouses died
 			if ( CompareDates( (*it).Husband.Death, marr ) == -1 )
-			{
-				cout << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Husband's death occurs before his marriage!* *" << endl;
-				output << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Husband's death occurs before his marriage!* *" << endl;
-			}
+				output << "US-06 ERROR: Husband's death occurs before his marriage!" << "\t\t Line " << (*it).linenum << endl; 
+
 			if ( CompareDates( (*it).Wife.Death, marr ) == -1 )
-			{
-				cout << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Wife's death occurs before her marriage!* *" << endl;
-				output << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Wife's death occurs before her marriage!* *" << endl;
-			}
+				output << "US-06 ERROR: Wife's death occurs before her marriage!" << "\t\t Line " << (*it).linenum << endl; 
 
 
 			//    Marriage before one of the spouses was born
 			if ( CompareDates( marr, (*it).Husband.Birth ) == -1 )
-			{
-				cout << "Line: " << (*it).linenum << "\t " << "* * ERROR FOUND: Husband married before he was born!* *" << endl;
-				output << "* * ERROR FOUND: Husband married before he was born!* *" << endl;
-			}
+				output << "US-07 ERROR: Husband married before he was born!" << "\t\t Line " << (*it).linenum << endl; 
+
 			if ( CompareDates( marr, (*it).Wife.Birth ) == -1 )
-			{
-				cout << "Line: " << (*it).linenum << "\t " << "* * ERROR FOUND: Wife married before she was born!* *" << endl;
-				output << "* * ERROR FOUND: Wife married before she was born!* *" << endl;
-			}
+				output << "US-07 ERROR: Wife married before she was born!" << "\t\t\t Line " << (*it).linenum << endl; 
+
 		}
 
 		// Check for Divorces
@@ -459,13 +439,9 @@ int _tmain(int argc, _TCHAR* argv[])
 			output << "\t Date Divorced : " << put_time(&div, "%d %b %Y") << "\n";
 
 			// Divorce Anomaly?
+			//	Check for Divorce before marriage
 			if ( CompareDates( div, marr ) == -1 )
-			{
-				cout << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Divorce occurs before marriage!* *" << endl;
-				cout << put_time(&div, "%d %b %Y") << " is before " << put_time(&marr, "%d %b %Y") << endl;
-				output << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Divorce occurs before marriage!* *" << endl;
-				output << "* *ERROR FOUND: Divorce occurs before marriage!* *" << endl;
-			}
+				output << "US-10 ERROR: Divorce occurs before marriage!" << "\t\t\t Line " << (*it).linenum << endl; 
 		}
 		if (it->Children.size() >= 10)
 		{
