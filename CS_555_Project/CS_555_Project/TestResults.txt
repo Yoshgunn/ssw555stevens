@@ -1,12 +1,13 @@
-Line: 250	 * *ERROR FOUND: There are two husb!* *
+Line: 250	 * *ERROR FOUND: There are two husbands in this marriage!* *
 
 Family Id : @F1@
 	 Husband Name : Earl
 	 Wife Name : Angela
 	 Wife Birth : 29 Mar 1934
 	 Wife Death : 06 Sep 1930
-* *ERROR FOUND: Wife's death occurs before her birth!* *
+Line: 206	 * *ERROR FOUND: Wife's death occurs before her birth!* *
 	 Date Married : 06 Aug 1954
+Line: 206	 * *ERROR FOUND: Wife's death occurs before her marriage!* *
 		 Child Name : Paula
 * *ERROR FOUND: Child's birth occurs after mother's death!* *
 		 Child Name : Joshua
@@ -76,6 +77,7 @@ Line: 248	 * *ERROR FOUND: This family has more than 10 children!* *
 		 Child Name : Noble
 
 Family Id : @F7@
+Line: 266	 * *ERROR FOUND: Marriage contains siblings!* *
 		 Child Name : Alice
 
 Family Id : @F8@

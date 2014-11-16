@@ -15,7 +15,9 @@ public:
 	std::tm Death;
 	string LegalName;
 	Person *Spouse;
-	Person *Mother = NULL;
-	Person *Father = NULL;
+	Person *Mother;
+	Person *Father;
+	// Person *Mother = NULL;		// Code can't run with these two lines, it fails
+	// Person *Father = NULL;
 };
 

@@ -11,6 +11,19 @@ int CompareDates(std::tm first,std::tm second)
 	// 1	First came later
 	// 0	Same date
 	// -1	First came before
+	
+	// Special Death case
+	if ( first.tm_year == -858993460 )
+	{
+		// This event did not happen, so it is infinitely later.
+		return 1;
+	}
+	else if ( second.tm_year == -858993460 )
+	{		
+		// Same thing
+		return 1;
+	}
+
 
 	if((first.tm_year == second.tm_year) && (first.tm_mon == second.tm_mon) && (first.tm_mday == second.tm_mday))
 	{
@@ -111,6 +124,8 @@ std::vector<Person> GetPeople()
 					else if( buf.substr(0,2) =="@I")
 					{
 						p.Id = buf;
+						p.Father = NULL;		// Experimental
+						p.Mother = NULL;
 					}
 					else if( buf =="GIVN")
 					{
@@ -218,8 +233,8 @@ std::vector<Family> GetFamilies(std::vector<Person> &people, ofstream &output)
 						ss >> id;
 						if (f.Husband.Id != "")
 						{
-							cout << "Line: " << linenum << "\t " << "* *ERROR FOUND: There are two husb!* *" << endl;
-							output << "Line: " << linenum << "\t " << "* *ERROR FOUND: There are two husb!* *" << endl;
+							cout << "Line: " << linenum << "\t " << "* *ERROR FOUND: There are two husbands in this marriage!* *" << endl;
+							output << "Line: " << linenum << "\t " << "* *ERROR FOUND: There are two husbands in this marriage!* *" << endl;
 						}
 						else 
 						f.Husband = *FindPerson(id,people);
@@ -319,6 +334,16 @@ int _tmain(int argc, _TCHAR* argv[])
 			{
 				cout << "\t Husband Birth : " << put_time(&husbBirth, "%d %b %Y") << "\n";
 				output << "\t Husband Birth : " << put_time(&husbBirth, "%d %b %Y") << "\n";
+
+				// Check if born before father
+				if ((*it).Husband.Father) //&& CompareDates(husbBirth, (*it).Husband.Father->Birth) == -1)
+				{
+					std:tm grandpaTime = (*it).Husband.Father->Birth;
+					// string grandpaName = (*it).Husband.Father->GivenName;
+					// cout << "Dad's name = " << (*it).Husband.Father->GivenName;
+					// cout << "Dad's birth = " << grandpaTime.tm_year << ", " << grandpaTime.tm_mon << ", " << grandpaTime.tm_mday << endl;
+					// cout << "Birth before dad!" << endl;
+				}		
 			}
 
 			// Husband's Death
@@ -364,9 +389,12 @@ int _tmain(int argc, _TCHAR* argv[])
 				output << "\t Wife Death : " << put_time(&wifeDeath, "%d %b %Y") << "\n"; \
 
 					// Check if died before born
-					if (CompareDates(wifeBirth, wifeDeath) == 1) {
-					cout << "* *ERROR FOUND: Wife's death occurs before her birth!* *" << endl;
-					output << "* *ERROR FOUND: Wife's death occurs before her birth!* *" << endl;
+					if (CompareDates(wifeBirth, wifeDeath) == 1) 
+					{
+						cout << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Wife's death occurs before her birth!* *" << endl;
+						output << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Wife's death occurs before her birth!* *" << endl;
+						// cout << "* *ERROR FOUND: Wife's death occurs before her birth!* *" << endl;
+						// output << "* *ERROR FOUND: Wife's death occurs before her birth!* *" << endl;
 					}
 			}
 		}
@@ -387,13 +415,16 @@ int _tmain(int argc, _TCHAR* argv[])
 			//    Marriage after one of the spouses died
 			if ( CompareDates( (*it).Husband.Death, marr ) == -1 )
 			{
-				// This code will not work. We need to set Death to NULL before we can do this.
-				// Additionally, we need to adjust the code to handle odd lines like 1 DEAT Y
-				// that do not provide a date.
-
-				// cout << "* *ERROR FOUND: Death occurs before marriage!* *" << endl;
-				// output << "* *ERROR FOUND: Death occurs before marriage!* *" << endl;
+				cout << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Husband's death occurs before his marriage!* *" << endl;
+				output << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Husband's death occurs before his marriage!* *" << endl;
 			}
+			if ( CompareDates( (*it).Wife.Death, marr ) == -1 )
+			{
+				cout << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Wife's death occurs before her marriage!* *" << endl;
+				output << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Wife's death occurs before her marriage!* *" << endl;
+			}
+
+
 			//    Marriage before one of the spouses was born
 			if ( CompareDates( marr, (*it).Husband.Birth ) == -1 )
 			{
