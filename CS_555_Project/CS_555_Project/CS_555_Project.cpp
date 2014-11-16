@@ -181,6 +181,31 @@ Person *FindPerson(string id, std::vector<Person> &people)
 			 return &*it;
 	 }
 }
+
+/*
+*	UC12: Everyone have unique id
+*/
+void checkIds(std::vector<Person> &people) {
+	int count = 0;
+	string uids[100];
+
+	for (std::vector<Person>::iterator it = people.begin() ; it != people.end(); ++it) {
+		bool duplicate = false;
+
+		for(int i = 0; !duplicate && i < count; i++) {
+			if((*it).Id == uids[i]) {
+				cout << "* *ERROR FOUND: Duplicate ID (" << (*it).Id << ") found!* *\n" << endl;
+				duplicate = true;
+			}
+		}
+
+		if(!duplicate) {
+			uids[count] = (*it).Id;
+			count++;
+		}
+	}
+}
+
 std::vector<Family> GetFamilies(std::vector<Person> &people, ofstream &output)
 {
 	string line;
@@ -306,8 +331,11 @@ int _tmain(int argc, _TCHAR* argv[])
 	ofstream output("TestResults.txt");
 
 	std::vector<Person> people = GetPeople();
+		
+	checkIds(people);
+
 	std::vector<Family> families = GetFamilies(people,output);
-	
+
 	for (std::vector<Family>::const_iterator it = families.begin(); it!=families.end(); ++it) 
 	{
 		cout << endl << "Family Id : " << (*it).Id << "\n";
