@@ -5,15 +5,15 @@ Family Id : @F1@
 	 Wife Name : Angela
 	 Wife Birth : 29 Mar 1934
 	 Wife Death : 06 Sep 1930
-Line: 206	 * *ERROR FOUND: Wife's death occurs before her birth!* *
+US-04 ERROR: Wife's death occurs before her birth!		 Line 206
 	 Date Married : 06 Aug 1954
 Line: 206	 * *ERROR FOUND: Wife's death occurs before her marriage!* *
 		 Child Name : Paula
-* *ERROR FOUND: Child's birth occurs after mother's death!* *
+US-05 ERROR: Child's birth occurs after mother's death!		 Line 206
 		 Child Name : Joshua
-* *ERROR FOUND: Child's birth occurs before father's birth!* *
-* *ERROR FOUND: Child's birth occurs before mother's birth!* *
-* *ERROR FOUND: Child's birth occurs after mother's death!* *
+US-02 ERROR: Child's birth occurs before father's birth!	 Line 206
+US-03 ERROR: Child's birth occurs before mother's birth!	 Line 206
+US-05 ERROR: Child's birth occurs after mother's death!		 Line 206
 
 Family Id : @F2@
 	 Husband Name : David
@@ -63,8 +63,8 @@ Family Id : @F6@
 	 Date Married : 08 Nov 1985
 Line: 248	 * *ERROR FOUND: This family has more than 10 children!* *
 		 Child Name : Alex
-* *ERROR FOUND: Child's birth occurs before father's birth!* *
-* *ERROR FOUND: Child's birth occurs before mother's birth!* *
+US-02 ERROR: Child's birth occurs before father's birth!	 Line 248
+US-03 ERROR: Child's birth occurs before mother's birth!	 Line 248
 		 Child Name : Sabrina
 		 Child Name : Dan
 		 Child Name : Bradley

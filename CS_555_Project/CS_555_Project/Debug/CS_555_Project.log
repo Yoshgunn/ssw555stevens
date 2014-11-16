@@ -1,4 +1,4 @@
-﻿Build started 11/16/2014 1:53:52 PM.
+﻿Build started 11/16/2014 4:00:40 PM.
      1>Project "C:\Users\Yoshgunn\Documents\MastersDegree\SSW-555-Agile\GroupProject\ssw555stevens\CS_555_Project\CS_555_Project\CS_555_Project.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\CS_555_Project.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -25,4 +25,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.99
+Time Elapsed 00:00:00.70

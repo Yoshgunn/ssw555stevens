@@ -364,14 +364,7 @@ int _tmain(int argc, _TCHAR* argv[])
 				output << "\t Husband Birth : " << put_time(&husbBirth, "%d %b %Y") << "\n";
 
 				// Check if born before father
-				if ((*it).Husband.Father) //&& CompareDates(husbBirth, (*it).Husband.Father->Birth) == -1)
-				{
-					std:tm grandpaTime = (*it).Husband.Father->Birth;
-					// string grandpaName = (*it).Husband.Father->GivenName;
-					// cout << "Dad's name = " << (*it).Husband.Father->GivenName;
-					// cout << "Dad's birth = " << grandpaTime.tm_year << ", " << grandpaTime.tm_mon << ", " << grandpaTime.tm_mday << endl;
-					// cout << "Birth before dad!" << endl;
-				}		
+				// Cannot access "grandfather" without crashing the program.
 			}
 
 			// Husband's Death
@@ -383,10 +376,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 				// Check if died before born
 				if (CompareDates(husbBirth, husbDeath) == 1)
-				{
-					cout << "* *ERROR FOUND: Husband's death occurs before his birth!* *" << endl;
-					output << "* *ERROR FOUND: Husband's death occurs before his birth!* *" << endl;
-				}
+					output << "Line: " << (*it).linenum << "\t " << "US-04 ERROR: Husband's death occurs before his birth!" << endl;
 			}
 		}
 		if (it->Husband.Id != "")
@@ -418,12 +408,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 					// Check if died before born
 					if (CompareDates(wifeBirth, wifeDeath) == 1) 
-					{
-						cout << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Wife's death occurs before her birth!* *" << endl;
-						output << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Wife's death occurs before her birth!* *" << endl;
-						// cout << "* *ERROR FOUND: Wife's death occurs before her birth!* *" << endl;
-						// output << "* *ERROR FOUND: Wife's death occurs before her birth!* *" << endl;
-					}
+						output << "US-04 ERROR: Wife's death occurs before her birth!" << "\t\t Line " << (*it).linenum << endl; 
 			}
 		}
 		// Check siblings
@@ -510,22 +495,16 @@ int _tmain(int argc, _TCHAR* argv[])
 			}
 
 			// Check if born before father's birth
-			if (CompareDates(childBirth, (*it).Husband.Birth) == -1) {
-				cout << "* *ERROR FOUND: Child's birth occurs before father's birth!* *" << endl;
-				output << "* *ERROR FOUND: Child's birth occurs before father's birth!* *" << endl;
-			}
+			if (CompareDates(childBirth, (*it).Husband.Birth) == -1)
+				output << "US-02 ERROR: Child's birth occurs before father's birth!" << "\t Line " << (*it).linenum << endl; 
 
 			// Check if born before mother's birth
-			if (CompareDates(childBirth, (*it).Wife.Birth) == -1) {
-				cout << "* *ERROR FOUND: Child's birth occurs before mother's birth!* *" << endl;
-				output << "* *ERROR FOUND: Child's birth occurs before mother's birth!* *" << endl;
-			}
+			if (CompareDates(childBirth, (*it).Wife.Birth) == -1)
+				output << "US-03 ERROR: Child's birth occurs before mother's birth!" << "\t Line " << (*it).linenum << endl; 
 
 			// Check if born after mother's death
-			if (CompareDates(childBirth, (*it).Wife.Death) == 1 && (*it).Wife.Death.tm_year >= 0 && (*it).Wife.Death.tm_mon >= 0 && (*it).Wife.Death.tm_mday >= 0) {
-				cout << "* *ERROR FOUND: Child's birth occurs after mother's death!* *" << endl;
-				output << "* *ERROR FOUND: Child's birth occurs after mother's death!* *" << endl;
-			}
+			if (CompareDates(childBirth, (*it).Wife.Death) == 1 && (*it).Wife.Death.tm_year >= 0 && (*it).Wife.Death.tm_mon >= 0 && (*it).Wife.Death.tm_mday >= 0)
+				output << "US-05 ERROR: Child's birth occurs after mother's death!" << "\t\t Line " << (*it).linenum << endl; 
 		}
 		cout << "\n";
 	}
