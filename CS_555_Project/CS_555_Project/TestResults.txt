@@ -1,5 +1,3 @@
-US-15 ERROR: There are two husbands in this marriage!		 Line ???
-
 Family Id : @F1@
 	 Husband Name : Earl
 	 Wife Name : Angela
@@ -15,6 +13,8 @@ US-02 ERROR: Child's birth occurs before father's birth!	 Line 206
 US-03 ERROR: Child's birth occurs before mother's birth!	 Line 206
 US-05 ERROR: Child's birth occurs after mother's death!		 Line 206
 
+
+
 Family Id : @F2@
 	 Husband Name : David
 	 Husband Birth : 12 Mar 1962
@@ -25,8 +25,10 @@ Family Id : @F2@
 US-10 ERROR: Divorce occurs before marriage!			 Line 214
 		 Child Name : Shannon
 
+
+
 Family Id : @F3@
-Line: 223	 * *ERROR FOUND: Both spouses are the same gender!* *
+US-15 ERROR: Both spouses are the same gender!			 Line 223
 	 Husband Name : Jerry
 US-13 ERROR: Husbands must be Male!				 Line 223
 	 Husband Birth : 18 Apr 1955
@@ -39,14 +41,18 @@ US-07 ERROR: Wife married before she was born!			 Line 223
 		 Child Name : Angela
 		 Child Name : Andrew
 
+
+
 Family Id : @F4@
 	 Husband Name : Andrew
 	 Husband Birth : 03 Feb 1988
 	 Wife Name : Jillian
 	 Wife Birth : 03 Aug 1989
 
+
+
 Family Id : @F5@
-Line: 239	 * *ERROR FOUND: Both spouses are the same gender!* *
+US-15 ERROR: Both spouses are the same gender!			 Line 239
 	 Husband Name : Joshua
 	 Husband Birth : 07 Dec 1931
 	 Wife Name : Alice
@@ -55,13 +61,15 @@ US-14 ERROR: Wives must be Female!				 Line 239
 	 Date Married : 15 Apr 1984
 		 Child Name : Danielle
 
+
+
 Family Id : @F6@
-	 Husband Name : Alice
-	 Husband Birth : 01 Oct 1960
+	 Husband Name : Thomas
+	 Husband Birth : 03 Oct 1961
 	 Wife Name : Scarlet
 	 Wife Birth : 08 Oct 1959
 	 Date Married : 08 Nov 1985
-Line: 248	 * *ERROR FOUND: This family has more than 10 children!* *
+US-18 ERROR: This family has more than 10 children!		 Line 248
 		 Child Name : Alex
 US-02 ERROR: Child's birth occurs before father's birth!	 Line 248
 US-03 ERROR: Child's birth occurs before mother's birth!	 Line 248
@@ -76,9 +84,13 @@ US-03 ERROR: Child's birth occurs before mother's birth!	 Line 248
 		 Child Name : Andrew
 		 Child Name : Noble
 
+
+
 Family Id : @F7@
-Line: 266	 * *ERROR FOUND: Marriage contains siblings!* *
+US-17 ERROR: Marriage between siblings!				 Line 266
 		 Child Name : Alice
+
+
 
 Family Id : @F8@
 	 Husband Name : Alex
@@ -86,9 +98,14 @@ Family Id : @F8@
 	 Wife Name : Danielle
 	 Wife Birth : 17 Jun 1985
 
+
+
 Family Id : @F9@
 	 Husband Name : Eric
 	 Husband Birth : 05 Jul 1990
 	 Wife Name : Quinn
 	 Wife Birth : 07 Jun 1989
-Line: 274	 * *ERROR FOUND: Marriage contains siblings!* *
+US-17 ERROR: Marriage between siblings!				 Line 274
+
+
+

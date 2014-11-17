@@ -256,10 +256,10 @@ std::vector<Family> GetFamilies(std::vector<Person> &people, ofstream &output)
 					{
 						string id;
 						ss >> id;
-						if (f.Husband.Id != "")
-							output << "US-15 ERROR: There are two husbands in this marriage!" << "\t\t Line ???" << endl;
+						// if (f.Husband.Id != "")		// REDUNDANT WARNING
+						// 	output << "US-15 ERROR: There are two husbands in this marriage!" << "\t\t Line ???" << endl;
 
-						else 
+						// else 
 						f.Husband = *FindPerson(id,people);
 						//ss >> f.GivenName;
 					}
@@ -334,15 +334,12 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	for (std::vector<Family>::const_iterator it = families.begin(); it!=families.end(); ++it) 
 	{
-		cout << endl << "Family Id : " << (*it).Id << "\n";
-		output << endl << "Family Id : " << (*it).Id << "\n";
+		output << "Family Id : " << (*it).Id << "\n";
 		if (it->Husband.Id != "")
 		{
 			if ((*it).Husband.Sex == (*it).Wife.Sex)
-			{
-				cout << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Both spouses are the same gender!* *" << endl;
-				output << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Both spouses are the same gender!* *" << endl;
-			}
+				output << "US-15 ERROR: Both spouses are the same gender!" << "\t\t\t Line " << (*it).linenum << endl; 
+			
 			cout << "\t Husband Name : " << (*it).Husband.GivenName << "\n";
 			output << "\t Husband Name : " << (*it).Husband.GivenName << "\n";
 
@@ -400,12 +397,10 @@ int _tmain(int argc, _TCHAR* argv[])
 						output << "US-04 ERROR: Wife's death occurs before her birth!" << "\t\t Line " << (*it).linenum << endl; 
 			}
 		}
-		// Check siblings
+		// Check for siblings married to one another
 		if ((it->Husband.Mother) && (it->Husband.Mother == it->Wife.Mother) || (it->Husband.Father) && (it->Husband.Father == it->Wife.Father))
-		{
-			cout << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Marriage contains siblings!* *" << endl;
-			output << "Line: " << (*it).linenum << "\t " << "* *ERROR FOUND: Marriage contains siblings!* *" << endl;
-		}
+			output << "US-17 ERROR: Marriage between siblings!" << "\t\t\t\t Line " << (*it).linenum << endl; 
+
 		// Check for Marriages
 		std::tm marr = (*it).Marriage;
 		if ( marr.tm_year != 0 && marr.tm_mon != 0 && marr.tm_mday != 0 )
@@ -444,10 +439,8 @@ int _tmain(int argc, _TCHAR* argv[])
 				output << "US-10 ERROR: Divorce occurs before marriage!" << "\t\t\t Line " << (*it).linenum << endl; 
 		}
 		if (it->Children.size() >= 10)
-		{
-			cout << "Line: " << it->linenum << "\t " << "* *ERROR FOUND: This family has more than 10 children!* *" << endl;
-			output << "Line: " << it->linenum << "\t " << "* *ERROR FOUND: This family has more than 10 children!* *" << endl;
-		}
+			output << "US-18 ERROR: This family has more than 10 children!" << "\t\t Line " << (*it).linenum << endl; 
+
 		for (std::vector<Person>::const_iterator itp = (*it).Children.begin(); itp!=(*it).Children.end(); ++itp) 
 		{
 			cout << "\t\t Child Name : " << (*itp).GivenName << "\n";
@@ -464,10 +457,9 @@ int _tmain(int argc, _TCHAR* argv[])
 			{
 				cout << "\t\t Child Death : " << put_time(&childDeath, "%d %b %Y") << "\n";
 
-				if( CompareDates( childBirth, childDeath ) == 1 ) {
-					cout << "* *ERROR FOUND: Child's death occurs before his/her birth!* *" << endl;
-					output << "* *ERROR FOUND: Child's death occurs before his/her birth!* *" << endl;
-				}
+				if( CompareDates( childBirth, childDeath ) == 1 ) 
+					cout << "US-14 ERROR: Child's death occurs before birth!" << "\t\t\t Line " << (*it).linenum << endl;
+				
 			}
 
 			// Check if born before father's birth
@@ -482,7 +474,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			if (CompareDates(childBirth, (*it).Wife.Death) == 1 && (*it).Wife.Death.tm_year >= 0 && (*it).Wife.Death.tm_mon >= 0 && (*it).Wife.Death.tm_mday >= 0)
 				output << "US-05 ERROR: Child's birth occurs after mother's death!" << "\t\t Line " << (*it).linenum << endl; 
 		}
-		cout << "\n";
+		output << "\n\n\n";
 	}
 	/*else cout << "Unable to open file \n"; */
 
