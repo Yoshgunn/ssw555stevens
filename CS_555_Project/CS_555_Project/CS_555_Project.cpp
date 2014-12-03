@@ -86,6 +86,15 @@ std::tm try_get_date(const std::string& s)
 		 //std::cout << std::put_time(&t, "%Y %b %d") << '\n';
 		return t;
 }
+Person CreatePerson()
+{
+	Person pe = Person();
+	pe.Father = &Person();
+	pe.Father->Id = "0";
+	pe.Mother = &Person();
+	pe.Mother->Id = "0";
+	return pe;
+}
 std::vector<Person> GetPeople()
 {
 	string line;
@@ -103,7 +112,7 @@ std::vector<Person> GetPeople()
 			{
 				if(totalPep >0)
 				people.push_back(p);
-				p=Person();
+				p=CreatePerson();
 				totalPep++;
 			}
 			//cout << "Original Line: \"" << line <<"\"";
@@ -206,6 +215,27 @@ void checkIds(std::vector<Person> &people) {
 	}
 }
 
+bool FindParent(std::vector<Family> &families, string id,Person& peo, bool findFather)
+{
+	if(id!="")
+	{
+		for (std::vector<Family>::const_iterator it = families.begin(); it!=families.end(); ++it) 
+		{
+			for (std::vector<Person>::const_iterator itp = (*it).Children.begin(); itp!=(*it).Children.end(); ++itp) 
+			{
+				if((*itp).Id == id)
+				{
+					if(findFather)
+						peo = ((*it).Husband);
+					else
+						peo = ((*it).Wife);
+					return true;
+				}
+			}
+		}
+	}
+	return false;
+}
 std::vector<Family> GetFamilies(std::vector<Person> &people, ofstream &output)
 {
 	string line;
@@ -473,6 +503,42 @@ int _tmain(int argc, _TCHAR* argv[])
 			// Check if born after mother's death
 			if (CompareDates(childBirth, (*it).Wife.Death) == 1 && (*it).Wife.Death.tm_year >= 0 && (*it).Wife.Death.tm_mon >= 0 && (*it).Wife.Death.tm_mday >= 0)
 				output << "US-05 ERROR: Child's birth occurs after mother's death!" << "\t\t Line " << (*it).linenum << endl; 
+
+			// Check if born before grandfather's or grandmother's birth
+			Person father;
+			if(FindParent(families, (*itp).Id,father,true))
+			{
+				Person grandfather;
+				if(FindParent(families,father.Id,grandfather,true))
+				{
+					if (CompareDates(childBirth, grandfather.Birth) == -1)
+						output << "US-08 ERROR: Child's birth occurs before grandfather's birth!" << "\t Line " << (*it).linenum << endl; 
+				}
+				Person grandMother;
+				if(FindParent(families,father.Id,grandMother,false))
+				{
+					if (CompareDates(childBirth, grandMother.Birth) == -1)
+						output << "US-09 ERROR: Child's birth occurs before grandmother's birth!" << "\t Line " << (*it).linenum << endl; 
+				}
+			}
+				// Check if born before grandfather's or grandmother's birth
+			Person mother;
+			if(FindParent(families, (*itp).Id,mother,false))
+			{
+				Person grandfather;
+				if(FindParent(families,mother.Id,grandfather,true))
+				{
+					if (CompareDates(childBirth, grandfather.Birth) == -1)
+						output << "US-08 ERROR: Child's birth occurs before grandfather's birth!" << "\t Line " << (*it).linenum << endl; 
+				}
+				Person grandMother;
+				if(FindParent(families,mother.Id,grandMother,false))
+				{
+					if (CompareDates(childBirth, grandMother.Birth) == -1)
+						output << "US-09 ERROR: Child's birth occurs before grandmother's birth!" << "\t Line " << (*it).linenum << endl; 
+				}
+			}
+				
 		}
 		output << "\n\n\n";
 	}
