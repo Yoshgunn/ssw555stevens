@@ -1,5 +1,8 @@
-﻿Build started 12/3/2014 9:16:04 PM.
+﻿Build started 12/3/2014 10:58:53 PM.
 Project "C:\Users\IEUser\Documents\GitHub\ssw555stevens\CS_555_Project\CS_555_Project\CS_555_Project.vcxproj" on node 2 (Build target(s)).
+ClCompile:
+  C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W0 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\CS_555_Project.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt CS_555_Project.cpp
+  CS_555_Project.cpp
 Link:
   C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\IEUser\Documents\GitHub\ssw555stevens\CS_555_Project\Debug\CS_555_Project.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\IEUser\Documents\GitHub\ssw555stevens\CS_555_Project\Debug\CS_555_Project.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\IEUser\Documents\GitHub\ssw555stevens\CS_555_Project\Debug\CS_555_Project.lib" /MACHINE:X86 Debug\CS_555_Project.obj
   Debug\stdafx.obj
@@ -8,4 +11,4 @@ Done Building Project "C:\Users\IEUser\Documents\GitHub\ssw555stevens\CS_555_Pro
 
 Build succeeded.
 
-Time Elapsed 00:00:00.60
+Time Elapsed 00:00:03.99

@@ -286,10 +286,14 @@ std::vector<Family> GetFamilies(std::vector<Person> &people, ofstream &output)
 					{
 						string id;
 						ss >> id;
-						// if (f.Husband.Id != "")		// REDUNDANT WARNING
-						// 	output << "US-15 ERROR: There are two husbands in this marriage!" << "\t\t Line ???" << endl;
+						if (f.Husband.Id != "")		// this is not REDUNDANT, it is US-16
+						{
+							output << "Family Id : " <<f.Id <<endl;
+							output << "US-16 ERROR: The number of husband is more than one, the other is: " << FindPerson(id, people)->GivenName<< "!\t Line " << linenum << endl;
+							output << endl;
+						}
 
-						// else 
+						else 
 						f.Husband = *FindPerson(id,people);
 						//ss >> f.GivenName;
 					}
@@ -298,8 +302,11 @@ std::vector<Family> GetFamilies(std::vector<Person> &people, ofstream &output)
 						string id;
 						ss >> id;
 						if (f.Wife.Id != "")
-							output << "US-15 ERROR: There are two wives!" << "\t\t Line ???" << endl;
-
+						{
+							output << "Family Id : " << f.Id << endl;
+							output << "US-16 ERROR: The number of wife is more than one, the other is: " << FindPerson(id, people)->GivenName << "!\t Line " << linenum << endl;
+							output << endl;
+						}// US-16
 						else 
 						f.Wife = *FindPerson(id,people);
 					}
