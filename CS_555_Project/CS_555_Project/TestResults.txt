@@ -1,12 +1,14 @@
 Family Id : @F1@
 	 Husband Name : Earl
 	 Wife Name : Angela
-	 Wife Birth : 29 Mar 1934
+	 Wife Birth : 29 Mar 1994
 	 Wife Death : 06 Sep 1930
 US-04 ERROR: Wife's death occurs before her birth!		 Line 206
 	 Date Married : 06 Aug 1954
 US-06 ERROR: Wife's death occurs before her marriage!		 Line 206
+US-07 ERROR: Wife married before she was born!			 Line 206
 		 Child Name : Paula
+US-03 ERROR: Child's birth occurs before mother's birth!	 Line 206
 US-05 ERROR: Child's birth occurs after mother's death!		 Line 206
 		 Child Name : Joshua
 US-02 ERROR: Child's birth occurs before father's birth!	 Line 206
@@ -40,6 +42,7 @@ US-07 ERROR: Wife married before she was born!			 Line 223
 	 Date Divorced : 25 Jun 1995
 		 Child Name : Angela
 		 Child Name : Andrew
+US-09 ERROR: Child's birth occurs before grandmother's birth!	 Line 223
 
 
 
@@ -60,6 +63,7 @@ US-14 ERROR: Wives must be Female!				 Line 239
 	 Wife Birth : 01 Oct 1960
 	 Date Married : 15 Apr 1984
 		 Child Name : Danielle
+US-09 ERROR: Child's birth occurs before grandmother's birth!	 Line 239
 
 
 
@@ -87,7 +91,6 @@ US-03 ERROR: Child's birth occurs before mother's birth!	 Line 248
 
 
 Family Id : @F7@
-US-17 ERROR: Marriage between siblings!				 Line 266
 		 Child Name : Alice
 
 

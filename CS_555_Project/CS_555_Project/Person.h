@@ -6,7 +6,11 @@ struct Person
 {
 
 public:
-
+	Person()
+	{
+		Mother = NULL;
+		Father = NULL;
+	}
 	string Id;
 	string GivenName;
 	string Surname;
@@ -17,7 +21,5 @@ public:
 	Person *Spouse;
 	Person *Mother;
 	Person *Father;
-	// Person *Mother = NULL;		// Code can't run with these two lines, it fails
-	// Person *Father = NULL;
 };
 
