@@ -1,26 +1,27 @@
 Family Id : @F6@
-US-16 ERROR: The number of husband is more than one, the other is: Thomas!	 Line 251
+US-16 ERROR: The number of husband is more than one, the other is: Thomas!	 Line 252
 
 Family Id : @F8@
-US-16 ERROR: The number of husband is more than one, the other is: Alice!	 Line 272
+US-16 ERROR: The number of husband is more than one, the other is: Alice!	 Line 273
 
 Family Id : @F1@
 	 Husband Name : Earl
 	 Husband Birth : 03 Jan 1932
+	 Husband Death : 13 Apr 1980
 	 Wife Name : Angela
 	 Wife Birth : 29 Mar 1994
 	 Wife Death : 06 Sep 1930
-US-04 ERROR: Wife's death occurs before her birth!		 Line 207
+US-04 ERROR: Wife's death occurs before her birth!		 Line 208
 	 Date Married : 06 Aug 1954
-US-06 ERROR: Wife's death occurs before her marriage!		 Line 207
-US-07 ERROR: Wife married before she was born!			 Line 207
+US-06 ERROR: Wife's death occurs before her marriage!		 Line 208
+US-07 ERROR: Wife married before she was born!			 Line 208
 		 Child Name : Paula
-US-03 ERROR: Child's birth occurs before mother's birth!	 Line 207
-US-05 ERROR: Child's birth occurs after mother's death!		 Line 207
+US-03 ERROR: Child's birth occurs before mother's birth!	 Line 208
+US-05 ERROR: Child's birth occurs after mother's death!		 Line 208
 		 Child Name : Joshua
-US-02 ERROR: Child's birth occurs before father's birth!	 Line 207
-US-03 ERROR: Child's birth occurs before mother's birth!	 Line 207
-US-05 ERROR: Child's birth occurs after mother's death!		 Line 207
+US-02 ERROR: Child's birth occurs before father's birth!	 Line 208
+US-03 ERROR: Child's birth occurs before mother's birth!	 Line 208
+US-05 ERROR: Child's birth occurs after mother's death!		 Line 208
 
 
 
@@ -31,25 +32,25 @@ Family Id : @F2@
 	 Wife Birth : 12 Apr 1960
 	 Date Married : 16 Jun 1999
 	 Date Divorced : 20 Aug 1996
-US-10 ERROR: Divorce occurs before marriage!			 Line 215
+US-10 ERROR: Divorce occurs before marriage!			 Line 216
 		 Child Name : Shannon
 
 
 
 Family Id : @F3@
-US-15 ERROR: Both spouses are the same gender!			 Line 224
+US-15 ERROR: Both spouses are the same gender!			 Line 225
 	 Husband Name : Jerry
-US-13 ERROR: Husbands must be Male!				 Line 224
+US-13 ERROR: Husbands must be Male!				 Line 225
 	 Husband Birth : 18 Apr 1955
 	 Wife Name : Paula
 	 Wife Birth : 12 Apr 1960
 	 Date Married : 08 Dec 1954
-US-07 ERROR: Husband married before he was born!		 Line 224
-US-07 ERROR: Wife married before she was born!			 Line 224
+US-07 ERROR: Husband married before he was born!		 Line 225
+US-07 ERROR: Wife married before she was born!			 Line 225
 	 Date Divorced : 25 Jun 1995
 		 Child Name : Angela
 		 Child Name : Andrew
-US-09 ERROR: Child's birth occurs before grandmother's birth!	 Line 224
+US-09 ERROR: Child's birth occurs before grandmother's birth!	 Line 225
 
 
 
@@ -62,15 +63,15 @@ Family Id : @F4@
 
 
 Family Id : @F5@
-US-15 ERROR: Both spouses are the same gender!			 Line 240
+US-15 ERROR: Both spouses are the same gender!			 Line 241
 	 Husband Name : Joshua
 	 Husband Birth : 07 Dec 1931
 	 Wife Name : Alice
-US-14 ERROR: Wives must be Female!				 Line 240
+US-14 ERROR: Wives must be Female!				 Line 241
 	 Wife Birth : 01 Oct 1960
 	 Date Married : 15 Apr 1984
 		 Child Name : Danielle
-US-09 ERROR: Child's birth occurs before grandmother's birth!	 Line 240
+US-09 ERROR: Child's birth occurs before grandmother's birth!	 Line 241
 
 
 
@@ -80,10 +81,10 @@ Family Id : @F6@
 	 Wife Name : Scarlet
 	 Wife Birth : 08 Oct 1959
 	 Date Married : 08 Nov 1985
-US-18 ERROR: This family has more than 10 children!		 Line 249
+US-18 ERROR: This family has more than 10 children!		 Line 250
 		 Child Name : Alex
-US-02 ERROR: Child's birth occurs before father's birth!	 Line 249
-US-03 ERROR: Child's birth occurs before mother's birth!	 Line 249
+US-02 ERROR: Child's birth occurs before father's birth!	 Line 250
+US-03 ERROR: Child's birth occurs before mother's birth!	 Line 250
 		 Child Name : Sabrina
 		 Child Name : Dan
 		 Child Name : Bradley
@@ -115,7 +116,7 @@ Family Id : @F9@
 	 Husband Birth : 05 Jul 1990
 	 Wife Name : Quinn
 	 Wife Birth : 07 Jun 1989
-US-17 ERROR: Marriage between siblings!				 Line 276
+US-17 ERROR: Marriage between siblings!				 Line 277
 
 
 
