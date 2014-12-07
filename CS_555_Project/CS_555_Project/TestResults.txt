@@ -6,6 +6,7 @@ US-16 ERROR: The number of husband is more than one, the other is: Alice!	 Line 
 
 Family Id : @F1@
 	 Husband Name : Earl
+	 Husband Birth : 03 Jan 1932
 	 Wife Name : Angela
 	 Wife Birth : 29 Mar 1994
 	 Wife Death : 06 Sep 1930

@@ -1,4 +1,4 @@
-﻿Build started 12/3/2014 10:58:53 PM.
+﻿Build started 12/6/2014 9:37:37 PM.
 Project "C:\Users\IEUser\Documents\GitHub\ssw555stevens\CS_555_Project\CS_555_Project\CS_555_Project.vcxproj" on node 2 (Build target(s)).
 ClCompile:
   C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W0 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\CS_555_Project.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt CS_555_Project.cpp
@@ -11,4 +11,4 @@ Done Building Project "C:\Users\IEUser\Documents\GitHub\ssw555stevens\CS_555_Pro
 
 Build succeeded.
 
-Time Elapsed 00:00:03.99
+Time Elapsed 00:00:02.19

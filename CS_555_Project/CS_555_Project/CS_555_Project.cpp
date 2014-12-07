@@ -385,7 +385,14 @@ int _tmain(int argc, _TCHAR* argv[])
 
 			// Husband's Birth
 			std::tm husbBirth = (*it).Husband.Birth;
-			if (husbBirth.tm_year != 0 && husbBirth.tm_mon != 0 && husbBirth.tm_mday != 0)
+
+			/**BUG FOUND**
+			The month is value is between 0-11, if the mon is Jan, it won't be work. 
+			So this is why we can not see the Earl(F1) birthday present in th result. 
+			We can changed mon !=0 to mon >=0 */
+			//if (husbBirth.tm_year != 0 && husbBirth.tm_mon != 0 && husbBirth.tm_mday != 0) 
+			if (husbBirth.tm_year != 0 && husbBirth.tm_mon >= 0 && husbBirth.tm_mday != 0)
+
 			{
 				cout << "\t Husband Birth : " << put_time(&husbBirth, "%d %b %Y") << "\n";
 				output << "\t Husband Birth : " << put_time(&husbBirth, "%d %b %Y") << "\n";
@@ -416,7 +423,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 			// Wife's Birth
 			std::tm wifeBirth = (*it).Wife.Birth;
-			if (wifeBirth.tm_year != 0 && wifeBirth.tm_mon != 0 && wifeBirth.tm_mday != 0)
+			if (wifeBirth.tm_year != 0 && wifeBirth.tm_mday != 0)
 			{
 				cout << "\t Wife Birth : " << put_time(&wifeBirth, "%d %b %Y") << "\n";
 				output << "\t Wife Birth : " << put_time(&wifeBirth, "%d %b %Y") << "\n";
@@ -440,7 +447,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		// Check for Marriages
 		std::tm marr = (*it).Marriage;
-		if ( marr.tm_year != 0 && marr.tm_mon != 0 && marr.tm_mday != 0 )
+		if ( marr.tm_year != 0 && marr.tm_mon >= 0 && marr.tm_mday != 0 )
 		{
 			cout << "\t Date Married : " << put_time(&marr, "%d %b %Y") << "\n";
 			output << "\t Date Married : " << put_time(&marr, "%d %b %Y") << "\n";
@@ -465,7 +472,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		// Check for Divorces
 		std::tm div = (*it).Divorce;
-		if ( div.tm_year != 0 && div.tm_mon != 0 && div.tm_mday != 0 )
+		if ( div.tm_year != 0 && div.tm_mon >= 0 && div.tm_mday != 0 )
 		{
 			cout << "\t Date Divorced : " << put_time(&div, "%d %b %Y") << "\n";
 			output << "\t Date Divorced : " << put_time(&div, "%d %b %Y") << "\n";
@@ -484,7 +491,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			output << "\t\t Child Name : " << (*itp).GivenName << "\n";
 
 			std::tm childBirth = (*itp).Birth;
-			if ( childBirth.tm_year != 0 && childBirth.tm_mon != 0 && childBirth.tm_mday != 0 )
+			if ( childBirth.tm_year != 0 && childBirth.tm_mon >= 0 && childBirth.tm_mday != 0 )
 			{
 				cout << "\t\t Child Birth : " << put_time(&childBirth, "%d %b %Y") << "\n";
 			}
