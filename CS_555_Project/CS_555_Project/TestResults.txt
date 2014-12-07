@@ -1,122 +1,145 @@
+= = = = = GEDCOM FAMILY SCANNER = = = = =
+=                                       =
+= Dipan Patel                           =
+= Yang Zhenbao                          =
+= Gwenn Flores                          =
+= Frank DiCola                          =
+=                                       =
+= = = = = = = = = = = = = = = = = = = = =
+
+
 Family Id : @F6@
-US-16 ERROR: The number of husband is more than one, the other is: Thomas!	 Line 252
+	 US-16 ERROR: Found more than one husband. Name: Thomas		 Line 252
+
+
 
 Family Id : @F8@
-US-16 ERROR: The number of husband is more than one, the other is: Alice!	 Line 273
+	 US-16 ERROR: Found more than one husband. Name: Alice		 Line 273
+
+
 
 Family Id : @F1@
-	 Husband Name : Earl
-	 Husband Birth : 03 Jan 1932
-	 Husband Death : 13 Apr 1980
-	 Wife Name : Angela
-	 Wife Birth : 29 Mar 1994
-	 Wife Death : 06 Sep 1930
-US-04 ERROR: Wife's death occurs before her birth!		 Line 208
-	 Date Married : 06 Aug 1954
-US-06 ERROR: Wife's death occurs before her marriage!		 Line 208
-US-07 ERROR: Wife married before she was born!			 Line 208
-		 Child Name : Paula
-US-03 ERROR: Child's birth occurs before mother's birth!	 Line 208
-US-05 ERROR: Child's birth occurs after mother's death!		 Line 208
-		 Child Name : Joshua
-US-02 ERROR: Child's birth occurs before father's birth!	 Line 208
-US-03 ERROR: Child's birth occurs before mother's birth!	 Line 208
-US-05 ERROR: Child's birth occurs after mother's death!		 Line 208
+Husband's Name: Earl
+Husband's Birth: 03 Jan 1932
+Husband's Death: 13 Apr 1980
+Wife's Name: Angela
+Wife's Birth: 29 Mar 1994
+Wife's Death: 06 Sep 1930
+	 US-04 ERROR: Wife's death occurs before her birth!		 Line 208
+Date Married: 06 Aug 1954
+	 US-06 ERROR: Wife's death occurs before her marriage!		 Line 208
+	 US-07 ERROR: Wife married before she was born!			 Line 208
+Child's Name: Paula
+	 US-03 ERROR: Child's birth occurs before mother's birth!	 Line 208
+	 US-05 ERROR: Child's birth occurs after mother's death!	 Line 208
+Child's Name: Joshua
+	 US-02 ERROR: Child's birth occurs before father's birth!	 Line 208
+	 US-03 ERROR: Child's birth occurs before mother's birth!	 Line 208
+	 US-05 ERROR: Child's birth occurs after mother's death!	 Line 208
 
 
 
 Family Id : @F2@
-	 Husband Name : David
-	 Husband Birth : 12 Mar 1962
-	 Wife Name : Paula
-	 Wife Birth : 12 Apr 1960
-	 Date Married : 16 Jun 1999
-	 Date Divorced : 20 Aug 1996
-US-10 ERROR: Divorce occurs before marriage!			 Line 216
-		 Child Name : Shannon
+Husband's Name: David
+Husband's Birth: 12 Mar 1962
+Husband's Death: No record found.
+Wife's Name: Paula
+Wife's Birth: 12 Apr 1960
+Date Married: 16 Jun 1999
+Date of Divorce: 20 Aug 1996
+	 US-10 ERROR: Divorce occurs before marriage!			 Line 216
+Child's Name: Shannon
 
 
 
 Family Id : @F3@
-US-15 ERROR: Both spouses are the same gender!			 Line 225
-	 Husband Name : Jerry
-US-13 ERROR: Husbands must be Male!				 Line 225
-	 Husband Birth : 18 Apr 1955
-	 Wife Name : Paula
-	 Wife Birth : 12 Apr 1960
-	 Date Married : 08 Dec 1954
-US-07 ERROR: Husband married before he was born!		 Line 225
-US-07 ERROR: Wife married before she was born!			 Line 225
-	 Date Divorced : 25 Jun 1995
-		 Child Name : Angela
-		 Child Name : Andrew
-US-09 ERROR: Child's birth occurs before grandmother's birth!	 Line 225
+	 US-15 ERROR: Both spouses are the same gender!			 Line 225
+Husband's Name: Jerry
+	 US-13 ERROR: Husbands must be Male!				 Line 225
+Husband's Birth: 18 Apr 1955
+Husband's Death: No record found.
+Wife's Name: Paula
+Wife's Birth: 12 Apr 1960
+Date Married: 08 Dec 1954
+	 US-07 ERROR: Husband married before he was born!		 Line 225
+	 US-07 ERROR: Wife married before she was born!			 Line 225
+Date of Divorce: 25 Jun 1995
+Child's Name: Angela
+Child's Name: Andrew
+	 US-09 ERROR: Child's birth occurs before grandmother's birth!	 Line 225
 
 
 
 Family Id : @F4@
-	 Husband Name : Andrew
-	 Husband Birth : 03 Feb 1988
-	 Wife Name : Jillian
-	 Wife Birth : 03 Aug 1989
+Husband's Name: Andrew
+Husband's Birth: 03 Feb 1988
+Husband's Death: No record found.
+Wife's Name: Jillian
+Wife's Birth: 03 Aug 1989
 
 
 
 Family Id : @F5@
-US-15 ERROR: Both spouses are the same gender!			 Line 241
-	 Husband Name : Joshua
-	 Husband Birth : 07 Dec 1931
-	 Wife Name : Alice
-US-14 ERROR: Wives must be Female!				 Line 241
-	 Wife Birth : 01 Oct 1960
-	 Date Married : 15 Apr 1984
-		 Child Name : Danielle
-US-09 ERROR: Child's birth occurs before grandmother's birth!	 Line 241
+	 US-15 ERROR: Both spouses are the same gender!			 Line 241
+Husband's Name: Joshua
+Husband's Birth: 07 Dec 1931
+Husband's Death: No record found.
+Wife's Name: Alice
+	 US-14 ERROR: Wives must be Female!				 Line 241
+Wife's Birth: 01 Oct 1960
+Date Married: 15 Apr 1984
+Child's Name: Danielle
+	 US-02 ERROR: Child's birth occurs before father's birth!	 Line 241
+	 US-03 ERROR: Child's birth occurs before mother's birth!	 Line 241
+	 US-08 ERROR: Child's birth occurs before grandfather's birth!	 Line 241
+	 US-09 ERROR: Child's birth occurs before grandmother's birth!	 Line 241
 
 
 
 Family Id : @F6@
-	 Husband Name : Alice
-	 Husband Birth : 01 Oct 1960
-	 Wife Name : Scarlet
-	 Wife Birth : 08 Oct 1959
-	 Date Married : 08 Nov 1985
-US-18 ERROR: This family has more than 10 children!		 Line 250
-		 Child Name : Alex
-US-02 ERROR: Child's birth occurs before father's birth!	 Line 250
-US-03 ERROR: Child's birth occurs before mother's birth!	 Line 250
-		 Child Name : Sabrina
-		 Child Name : Dan
-		 Child Name : Bradley
-		 Child Name : Nicholas
-		 Child Name : Kaley
-		 Child Name : Anita
-		 Child Name : Quinn
-		 Child Name : Eric
-		 Child Name : Andrew
-		 Child Name : Noble
+Husband's Name: Alice
+Husband's Birth: 01 Oct 1960
+Husband's Death: No record found.
+Wife's Name: Scarlet
+Wife's Birth: 08 Oct 1959
+Date Married: 08 Nov 1985
+	 US-18 ERROR: This family has more than 10 children!		 Line 250
+Child's Name: Alex
+	 US-02 ERROR: Child's birth occurs before father's birth!	 Line 250
+	 US-03 ERROR: Child's birth occurs before mother's birth!	 Line 250
+Child's Name: Sabrina
+Child's Name: Dan
+Child's Name: Bradley
+Child's Name: Nicholas
+Child's Name: Kaley
+Child's Name: Anita
+Child's Name: Quinn
+Child's Name: Eric
+Child's Name: Andrew
+Child's Name: Noble
 
 
 
 Family Id : @F7@
-		 Child Name : Alice
+Child's Name: Alice
 
 
 
 Family Id : @F8@
-	 Husband Name : Alex
-	 Husband Birth : 14 Jul 1983
-	 Wife Name : Danielle
-	 Wife Birth : 17 Jun 1985
+Husband's Name: Alex
+Husband's Birth: 14 Jul 1983
+Husband's Death: No record found.
+Wife's Name: Danielle
 
 
 
 Family Id : @F9@
-	 Husband Name : Eric
-	 Husband Birth : 05 Jul 1990
-	 Wife Name : Quinn
-	 Wife Birth : 07 Jun 1989
-US-17 ERROR: Marriage between siblings!				 Line 277
+Husband's Name: Eric
+Husband's Birth: 05 Jul 1990
+Husband's Death: No record found.
+Wife's Name: Quinn
+Wife's Birth: 07 Jun 1989
+	 US-17 ERROR: Marriage between siblings!				 Line 277
 
 
 
